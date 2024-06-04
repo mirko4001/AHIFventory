@@ -100,8 +100,8 @@ namespace AHIFventory.Model
             }
         }
 
-        private double stock;
-        public double Stock
+        private int stock;
+        public int Stock
         {
             get
             {
@@ -118,10 +118,33 @@ namespace AHIFventory.Model
             }
         }
 
+        private int stockWarning;
+        public int StockWarning
+        {
+            get
+            {
+                return stockWarning;
+            }
 
+            set
+            {
+                if (stockWarning != value)
+                {
+                    stockWarning = value;
+                    onPropertyChanged("StockWarning");
+                }
+            }
+        }
+
+        public bool LowOnStock
+        {
+            get
+            {
+                return Stock <= StockWarning;
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
         public void onPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -129,5 +152,7 @@ namespace AHIFventory.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public Product() { }
     }
 }
