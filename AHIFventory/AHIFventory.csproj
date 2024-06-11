@@ -9,13 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.5" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.5" />
+    <PackageReference Include="WPF-UI" Version="3.0.4" />
   </ItemGroup>
 
   <ItemGroup>
