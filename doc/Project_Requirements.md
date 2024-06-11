@@ -1,11 +1,13 @@
 # AHIFventory
 
 ## Description
+
 * Inventory Management
 * for small Companies
 * functions for managing Products
 
 ## Must-Have
+
 * Add, edit and delete products
 * correct Display of items
 * notifications for low quantity
@@ -13,6 +15,7 @@
 * DATABASE Integration
 
 ## Nice-To-Have
+
 * Order management
 * MVVM-structure (kinda)
 * Import, Export (PDF, CSV)
@@ -21,6 +24,7 @@
 * Analytics
 
 ## No-Have
+
 * Cloud
 * Multi-Language
 * Multiplatform
