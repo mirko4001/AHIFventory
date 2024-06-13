@@ -26,7 +26,6 @@
         <Border Grid.Row="1" Background="WhiteSmoke" CornerRadius="10" Margin="5">
             <StackPanel  x:Name="ProductsStackPanel">
 
-                <controls:ProductUserControl />
 
             </StackPanel>
         </Border>

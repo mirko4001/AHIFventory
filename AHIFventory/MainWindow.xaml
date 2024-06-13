@@ -21,8 +21,8 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="AHIFventory" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="1" Text="Inventory Management"/>
+                        <TextBlock Text="AHIFventory" FontSize="24" FontWeight="Bold" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Text="Inventory Management" Margin="15,0,0,0"/>
                     </Grid>
                 </StackPanel>
             </ui:NavigationView.PaneHeader>
@@ -32,13 +32,13 @@
                 <ui:NavigationViewItemSeparator Margin="5,5"/>
                 <ui:NavigationViewItemHeader Text="Overview" Margin="5,0,0,0"/>
 
-                <ui:NavigationViewItem Content="Dashboard" VerticalAlignment="Top">
+                <ui:NavigationViewItem Content="Dashboard" VerticalAlignment="Top" TargetPageType="{x:Type local:HomePage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Home24" FontSize="30" Height="50"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                
-                <ui:NavigationViewItem Content="Products" >
+
+                <ui:NavigationViewItem Content="Products" TargetPageType="{x:Type local:ProductPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="DataHistogram24" FontSize="30" Height="50"/>
                     </ui:NavigationViewItem.Icon>
