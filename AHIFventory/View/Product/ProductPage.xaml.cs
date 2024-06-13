@@ -33,6 +33,8 @@ namespace AHIFventory
             ProductsStackPanel.Children.Add(productUserControl);
             */
 
+            ProductsStackPanel.Children.Clear();
+
             ProductViewModel.LoadProducts();
 
             foreach (Product product in ProductViewModel.Products)

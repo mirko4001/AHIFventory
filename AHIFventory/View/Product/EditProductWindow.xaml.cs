@@ -20,6 +20,7 @@ namespace AHIFventory
 
     public partial class EditProductWindow : Window
     {
+        public bool SaveOnClose = false;
         public Product ProductObject { get; set; }
 
         public EditProductWindow(Product product)
@@ -27,6 +28,11 @@ namespace AHIFventory
             InitializeComponent();
             ProductObject = product;
             DataContext = this;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveOnClose = true;
         }
     }
 }

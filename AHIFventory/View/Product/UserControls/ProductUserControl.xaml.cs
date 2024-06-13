@@ -21,7 +21,6 @@ namespace AHIFventory
     /// </summary>
     public partial class ProductUserControl : UserControl
     {
-
         public Product ProductObject { get; set; }
 
         public ProductUserControl(Product product)
@@ -35,6 +34,11 @@ namespace AHIFventory
         {
             EditProductWindow editProductWindow = new EditProductWindow(ProductObject);
             editProductWindow.ShowDialog();
+
+            if (editProductWindow.SaveOnClose)
+            {
+                ProductObject.SaveProduct();
+            }
         }
     }
 }
