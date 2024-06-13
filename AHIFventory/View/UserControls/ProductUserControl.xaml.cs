@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AHIFventory
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for ProductUserControl.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class ProductUserControl : UserControl
     {
-        public HomePage()
+        public ProductUserControl()
         {
             InitializeComponent();
         }

@@ -1,5 +1,4 @@
-﻿using AHIFventory.Model;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AHIFventory.ViewModel
+namespace AHIFventory
 {
     public class ProductViewModel
     {
@@ -27,20 +26,19 @@ namespace AHIFventory.ViewModel
                 {
                     while (reader.Read())
                     {
-                        var product = new Product
-                        {
-                            ProductID = reader.GetInt32(reader.GetOrdinal("ProductID")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            Description = reader.GetString(reader.GetOrdinal("Description")),
-                            Category = reader.GetString(reader.GetOrdinal("Category")),
-                            Price = reader.GetInt32(reader.GetOrdinal("Price")),
-                            Stock = reader.GetInt32(reader.GetOrdinal("Stock")),
-                            StockWarning = reader.GetInt32(reader.GetOrdinal("StockWarning"))
-                        };
-
+                        var product = new Product();
+                        product.LoadProduct(reader);
                         Products.Add(product);
                     }
                 }
+            }
+        }
+
+        public void SaveProducts()
+        {
+            foreach (Product product in Products) 
+            {
+                product.SaveProduct();
             }
         }
     }
