@@ -27,10 +27,7 @@
         <Border Grid.Row="1" Background="LightGray" CornerRadius="10" Margin="5">
             <ScrollViewer>
                 <StackPanel x:Name="ProductsStackPanel">
-                    <local:ProductUserControl Margin="5" />
-                    <local:ProductUserControl Margin="5" />
-                    <local:ProductUserControl Margin="5" />
-                    <local:ProductUserControl Margin="5" />
+
                 </StackPanel>
             </ScrollViewer>
         </Border>

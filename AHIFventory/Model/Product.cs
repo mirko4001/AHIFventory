@@ -192,7 +192,7 @@ namespace AHIFventory
 
         public void SaveProduct()
         {
-            using (var connection = new SqliteConnection("Data Source=your_database_path_here"))
+            using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
 

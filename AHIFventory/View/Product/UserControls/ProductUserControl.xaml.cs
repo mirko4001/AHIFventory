@@ -27,7 +27,7 @@ namespace AHIFventory
         public ProductUserControl(Product product)
         {
             InitializeComponent();
-
+            ProductObject = product;
             DataContext = this;
         }
 
