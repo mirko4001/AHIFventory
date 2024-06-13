@@ -33,7 +33,7 @@ namespace AHIFventory
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            EditProductWindow editProductWindow = new EditProductWindow();
+            EditProductWindow editProductWindow = new EditProductWindow(ProductObject);
             editProductWindow.ShowDialog();
         }
     }

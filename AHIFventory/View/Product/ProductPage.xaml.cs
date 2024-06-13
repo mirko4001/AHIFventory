@@ -24,12 +24,23 @@ namespace AHIFventory
         {
             InitializeComponent();
 
+            /*
             Product product = new Product("Screws", "Stuff used for stuff", "https://upload.wikimedia.org/wikipedia/commons/0/0c/Phillips_screw.jpg");
             product.SaveProduct();
 
             ProductUserControl productUserControl = new ProductUserControl(product);
             productUserControl.Margin = new Thickness(5);
             ProductsStackPanel.Children.Add(productUserControl);
+            */
+
+            ProductViewModel.LoadProducts();
+
+            foreach (Product product in ProductViewModel.Products)
+            {
+                ProductUserControl productUserControl = new ProductUserControl(product);
+                productUserControl.Margin = new Thickness(5);
+                ProductsStackPanel.Children.Add(productUserControl);
+            }
         }
     }
 }

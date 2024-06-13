@@ -181,14 +181,16 @@ namespace AHIFventory
 
         public Product(SqliteDataReader reader)
         {
-            ProductID = reader.GetInt32(reader.GetOrdinal("ProductID"));
-            Name = reader.GetString(reader.GetOrdinal("Name"));
-            Description = reader.GetString(reader.GetOrdinal("Description"));
-            Category = reader.GetString(reader.GetOrdinal("Category"));
-            Price = reader.GetInt32(reader.GetOrdinal("Price"));
-            Stock = reader.GetInt32(reader.GetOrdinal("Stock"));
-            StockWarning = reader.GetInt32(reader.GetOrdinal("StockWarning"));
+            ProductID = reader.IsDBNull(reader.GetOrdinal("ProductID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("ProductID"));
+            Name = reader.IsDBNull(reader.GetOrdinal("Name")) ? null : reader.GetString(reader.GetOrdinal("Name"));
+            Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description"));
+            Category = reader.IsDBNull(reader.GetOrdinal("Category")) ? null : reader.GetString(reader.GetOrdinal("Category"));
+            Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? 0 : reader.GetDouble(reader.GetOrdinal("Price"));
+            Stock = reader.IsDBNull(reader.GetOrdinal("Stock")) ? 0 : reader.GetInt32(reader.GetOrdinal("Stock"));
+            StockWarning = reader.IsDBNull(reader.GetOrdinal("StockWarning")) ? 0 : reader.GetInt32(reader.GetOrdinal("StockWarning"));
+            Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? null : reader.GetString(reader.GetOrdinal("Image"));
         }
+
 
         public void SaveProduct()
         {
@@ -202,25 +204,29 @@ namespace AHIFventory
                 if (ProductID == null)
                 {
                     // Insert new product
-                    query = "INSERT INTO tblProduct (Name, Description, Category, Price, Stock, StockWarning, Image) VALUES (@Name, @Description, @Category, @Price, @Stock, @StockWarning, @Image)";
+                    query = @"INSERT INTO tblProduct (Name, Description, Category, Price, Stock, StockWarning, Image) 
+                      VALUES (@Name, @Description, @Category, @Price, @Stock, @StockWarning, @Image)";
                 }
                 else
                 {
                     // Update existing product
-                    query = "UPDATE tblProduct SET Name = @Name, Description = @Description, Category = @Category, Price = @Price, Stock = @Stock, StockWarning = @StockWarning, Image = @Image WHERE ProductID = @ProductID";
+                    query = @"UPDATE tblProduct 
+                      SET Name = @Name, Description = @Description, Category = @Category, Price = @Price, 
+                          Stock = @Stock, StockWarning = @StockWarning, Image = @Image 
+                      WHERE ProductID = @ProductID";
                 }
 
                 using (var command = new SqliteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Name", Name);
-                    command.Parameters.AddWithValue("@Description", Description);
-                    command.Parameters.AddWithValue("@Category", Category);
+                    // Add parameters to the command
+                    command.Parameters.AddWithValue("@Name", Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Description", Description ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Category", Category ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Price", Price);
                     command.Parameters.AddWithValue("@Stock", Stock);
                     command.Parameters.AddWithValue("@StockWarning", StockWarning);
-                    command.Parameters.AddWithValue("@Image", Image);
+                    command.Parameters.AddWithValue("@Image", Image ?? (object)DBNull.Value);
 
-                    // Add the ProductID parameter for the update case
                     if (ProductID != null)
                     {
                         command.Parameters.AddWithValue("@ProductID", ProductID);
@@ -240,6 +246,7 @@ namespace AHIFventory
                 }
             }
         }
+
 
     }
 }
