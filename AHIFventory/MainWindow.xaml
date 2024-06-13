@@ -7,14 +7,65 @@
         xmlns:local="clr-namespace:AHIFventory"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
 
-        <ui:NavigationView>
-            
+    <Grid>
+
+        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" IsBackButtonVisible="Collapsed">
+            <ui:NavigationView.PaneHeader>
+                <StackPanel Orientation="Horizontal">
+                    <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Width="40" Height="40" Background="AliceBlue" Margin="5">
+                        <!--Hier kommt ein Logo-->
+                    </Border>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="AHIFventory" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Text="Inventory Management"/>
+                    </Grid>
+                </StackPanel>
+            </ui:NavigationView.PaneHeader>
+
+            <ui:NavigationView.MenuItems>
+
+                <ui:NavigationViewItemSeparator Margin="5,5"/>
+                <ui:NavigationViewItemHeader Text="Overview" Margin="5,0,0,0"/>
+
+                <ui:NavigationViewItem Content="Dashboard" VerticalAlignment="Top">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Home24" FontSize="30" Height="50"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                
+                <ui:NavigationViewItem Content="Products" >
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="DataHistogram24" FontSize="30" Height="50"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+
+                <ui:NavigationViewItem Content="Orders" >
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Desktop24" FontSize="30" Height="50"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.MenuItems>
+                
+            <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItemSeparator Margin="5,5"/>
+                <ui:NavigationViewItemHeader Text="Preferences" Margin="5,0,0,0"/>
+                <ui:NavigationViewItem Content="Settings">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Settings24" FontSize="30" Height="50"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+
+                <ui:NavigationViewItem Content="Theme">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:SymbolIcon Symbol="Album24" FontSize="30" Height="50"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.FooterMenuItems>
         </ui:NavigationView>
     </Grid>
 </Window>
