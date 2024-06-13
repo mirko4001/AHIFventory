@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AHIFventory.Model
+namespace AHIFventory
 {
     public class Order : INotifyPropertyChanged
     {
@@ -27,8 +27,8 @@ namespace AHIFventory.Model
             }
         }
 
-        private DateOnly orderDate;
-        public DateOnly OrderDate
+        private DateTime orderDate;
+        public DateTime OrderDate
         {
             get
             {
@@ -41,6 +41,42 @@ namespace AHIFventory.Model
                 {
                     orderDate = value;
                     onPropertyChanged("OrderDate");
+                }
+            }
+        }
+
+        private string supplier;
+        public string Supplier
+        {
+            get
+            {
+                return supplier;
+            }
+
+            set
+            {
+                if (supplier != value)
+                {
+                    supplier = value;
+                    onPropertyChanged("Supplier");
+                }
+            }
+        }
+
+        private int productID;
+        public int ProductID
+        {
+            get
+            {
+                return productID;
+            }
+
+            set
+            {
+                if (productID != value)
+                {
+                    productID = value;
+                    onPropertyChanged("ProductID");
                 }
             }
         }
