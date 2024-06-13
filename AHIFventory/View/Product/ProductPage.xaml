@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -33,6 +34,9 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
-        
+
+        <Border Grid.Row="2" Background="WhiteSmoke" CornerRadius="10" Margin="5">
+            <Button Content="Add" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+        </Border>
     </Grid>
 </Page>

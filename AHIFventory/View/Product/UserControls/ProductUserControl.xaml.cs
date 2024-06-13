@@ -22,11 +22,13 @@ namespace AHIFventory
     public partial class ProductUserControl : UserControl
     {
 
-        public Product product;
+        public Product ProductObject { get; set; }
 
-        public ProductUserControl()
+        public ProductUserControl(Product product)
         {
             InitializeComponent();
+
+            DataContext = this;
         }
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)

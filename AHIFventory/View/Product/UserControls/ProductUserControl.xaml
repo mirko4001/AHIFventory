@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="AHIFventory.ProductUserControl"
+﻿ <UserControl x:Class="AHIFventory.ProductUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AHIFventory"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="800" Height="150" Width="800" >
-
+             d:DesignHeight="150" d:DesignWidth="800" >
 
     <Border Background="WhiteSmoke" CornerRadius="10">
         <Grid>
@@ -15,25 +14,23 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="https://upload.wikimedia.org/wikipedia/commons/0/0c/Phillips_screw.jpg" Margin="5"  Grid.RowSpan="2" />
+            <Image Source="{Binding ProductObject.Image}" Margin="5"  Grid.RowSpan="2" />
 
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" >
-                <TextBlock TextAlignment="Center" Text="ProductID" x:Name="ProductIDTextBlock" />
-                <TextBlock TextAlignment="Center" Text="Name" x:Name="NameTextBlock" />
-                <TextBlock TextAlignment="Center" Text="Description" x:Name="DescriptionTextBlock" />
-                <TextBlock TextAlignment="Center" Text="Category" x:Name="CategoryTextBlock" />
-                <TextBlock TextAlignment="Center" Text="Price" x:Name="PriceTextBlock" />
-                <TextBlock TextAlignment="Center" Text="Stock" x:Name="StockTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.ProductID, StringFormat=Name: {0}}"  x:Name="ProductIDTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Description: {0}}" x:Name="NameTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Description, StringFormat=Description: {0}}" x:Name="DescriptionTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Category, StringFormat=Category: {0}}" x:Name="CategoryTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Price, StringFormat=Price per Unit: {0}}" x:Name="PriceTextBlock" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Stock, StringFormat=Stock: {0}}" x:Name="StockTextBlock" />
             </StackPanel>
 
-            <Button x:Name="EditButton" Content="Edit" Grid.Column="2" Foreground="Black" Click="EditButton_Click" />
-
-            <ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" />
+            <Button x:Name="EditButton" Content="Edit" Grid.Column="2" Foreground="Black" Click="EditButton_Click" Margin="5" />
         </Grid>
     </Border>
 

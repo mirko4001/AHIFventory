@@ -23,6 +23,9 @@ namespace AHIFventory
         public ProductPage()
         {
             InitializeComponent();
+
+            Product product = new Product("Screws", "Stuff used for stuff", "https://upload.wikimedia.org/wikipedia/commons/0/0c/Phillips_screw.jpg");
+            product.SaveProduct();
         }
     }
 }
