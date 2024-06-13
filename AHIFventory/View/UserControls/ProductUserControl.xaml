@@ -5,11 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AHIFventory"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="800">
+             d:DesignHeight="150" d:DesignWidth="800" Height="150" Width="800" >
+
 
     <Border Background="WhiteSmoke" CornerRadius="10">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="https://upload.wikimedia.org/wikipedia/commons/0/0c/Phillips_screw.jpg" Margin="5"  Grid.RowSpan="2" />
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" >
+                <TextBlock TextAlignment="Center" Text="ProductID" x:Name="ProductIDTextBlock" />
+                <TextBlock TextAlignment="Center" Text="Name" x:Name="NameTextBlock" />
+                <TextBlock TextAlignment="Center" Text="Description" x:Name="DescriptionTextBlock" />
+                <TextBlock TextAlignment="Center" Text="Category" x:Name="CategoryTextBlock" />
+                <TextBlock TextAlignment="Center" Text="Price" x:Name="PriceTextBlock" />
+                <TextBlock TextAlignment="Center" Text="Stock" x:Name="StockTextBlock" />
+            </StackPanel>
+
+            <Button x:Name="EditButton" Content="Edit" Grid.Column="2" Foreground="Black" Click="EditButton_Click" />
+
+            <ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" />
         </Grid>
     </Border>
 
