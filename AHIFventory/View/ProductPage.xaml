@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Products">
 
-    <Grid Background="White">
+    <Grid Background="LightGray">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,11 +23,15 @@
             <TextBlock Text="Products" TextAlignment="Center" />
         </Border>
 
-        <Border Grid.Row="1" Background="WhiteSmoke" CornerRadius="10" Margin="5">
-            <StackPanel  x:Name="ProductsStackPanel">
-
-
-            </StackPanel>
+        <Border Grid.Row="1" Background="LightGray" CornerRadius="10" Margin="5">
+            <ScrollViewer>
+                <StackPanel x:Name="ProductsStackPanel">
+                    <local:ProductUserControl Margin="5" />
+                    <local:ProductUserControl Margin="5" />
+                    <local:ProductUserControl Margin="5" />
+                    <local:ProductUserControl Margin="5" />
+                </StackPanel>
+            </ScrollViewer>
         </Border>
         
     </Grid>

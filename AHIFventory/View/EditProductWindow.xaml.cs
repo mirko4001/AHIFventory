@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Wpf.Ui.Controls;
 
 namespace AHIFventory
 {
     /// <summary>
-    /// Interaction logic for ProductUserControl.xaml
+    /// Interaction logic for EditProductWindow.xaml
     /// </summary>
-    public partial class ProductUserControl : UserControl
+    public partial class EditProductWindow : Window
     {
-
-        public Product product;
-
-        public ProductUserControl()
+        public EditProductWindow()
         {
             InitializeComponent();
-        }
-
-        private async void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            EditProductWindow editProductWindow = new EditProductWindow();
-            editProductWindow.ShowDialog();
         }
     }
 }
