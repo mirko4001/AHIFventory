@@ -43,7 +43,9 @@ namespace AHIFventory
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            ProductObject.DeleteProduct();
+            //ProductObject.DeleteProduct();
+            ProductViewModel.ProductsToDelete.Add(ProductObject);
+            ProductViewModel.Products.Remove(ProductObject);
         }
     }
 }

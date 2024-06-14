@@ -37,7 +37,6 @@ namespace AHIFventory
                 Price = product.Price,
                 StockWarning = product.StockWarning,
                 Image = product.Image,
-                Category = product.Category,
             };
 
             ProductMain = product;

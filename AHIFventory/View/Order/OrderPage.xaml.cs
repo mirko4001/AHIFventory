@@ -1,5 +1,4 @@
-﻿using AHIFventory.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,10 +36,7 @@ namespace AHIFventory
             }
             */
 
-            OrderViewModel.LoadOrders();
-
             UpdateList();
-
             OrderViewModel.Orders.CollectionChanged += Orders_CollectionChanged;
         }
 
@@ -63,7 +59,14 @@ namespace AHIFventory
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            AddOrderWindow addOrderWindow = new AddOrderWindow();
+            addOrderWindow.ShowDialog();
 
+            if (addOrderWindow.SaveOnClose)
+            {
+                //addOrderWindow.OrderObject.SaveOrder();
+                OrderViewModel.Orders.Add(addOrderWindow.OrderObject);
+            }
         }
     }
 }

@@ -19,6 +19,17 @@ namespace AHIFventory
         public MainWindow()
         {
             InitializeComponent();
+
+            ProductViewModel.LoadProducts();
+            OrderViewModel.LoadOrders();
+
+            Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ProductViewModel.SaveProducts();
+            OrderViewModel.SaveOrders();
         }
     }
 }

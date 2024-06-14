@@ -11,6 +11,7 @@ namespace AHIFventory
     public class ProductViewModel
     {
         public static ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
+        public static ObservableCollection<Product> ProductsToDelete { get; set; } = new ObservableCollection<Product>();
 
         public ProductViewModel() { }
 
@@ -37,6 +38,13 @@ namespace AHIFventory
 
         public static void SaveProducts()
         {
+            foreach (Product product in ProductsToDelete)
+            {
+                product.DeleteProduct();
+            }
+
+            ProductsToDelete.Clear();
+
             foreach (Product product in Products) 
             {
                 product.SaveProduct();

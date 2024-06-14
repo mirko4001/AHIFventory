@@ -22,8 +22,8 @@
             <Image Source="{Binding ProductObject.Image}" Margin="5" />
 
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" >
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.ProductID, StringFormat=Name: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Description: {0}}" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.ProductID, StringFormat=ProductID: {0}}" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Name: {0}}" />
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Description, StringFormat=Description: {0}}" />
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Category, StringFormat=Category: {0}}" />
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Price, StringFormat=Price per Unit: {0}}" />

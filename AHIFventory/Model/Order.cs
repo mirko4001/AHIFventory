@@ -1,4 +1,4 @@
-﻿using AHIFventory.ViewModel;
+﻿using AHIFventory;
 using Microsoft.Data.Sqlite;
 using System;
 using System.ComponentModel;
@@ -91,20 +91,6 @@ namespace AHIFventory
             }
         }
 
-        private string category;
-        public string Category
-        {
-            get { return category; }
-            set
-            {
-                if (category != value)
-                {
-                    category = value;
-                    onPropertyChanged("Category");
-                }
-            }
-        }
-
         private double price;
         public double Price
         {
@@ -133,6 +119,20 @@ namespace AHIFventory
             }
         }
 
+        private string action;
+        public string Action
+        {
+            get { return action; }
+            set
+            {
+                if (action != value)
+                {
+                    action = value;
+                    onPropertyChanged("Action");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void onPropertyChanged(string propertyName)
         {
@@ -141,11 +141,10 @@ namespace AHIFventory
 
         public Order() { }
         
-        public Order(string productName, string productDescription, string category, string supplier)
+        public Order(string productName, string productDescription, string supplier)
         {
             ProductName = productName;
             ProductDescription = productDescription;
-            Category = category;
             Supplier = supplier;
         }
 
@@ -157,9 +156,9 @@ namespace AHIFventory
             ProductID = reader.IsDBNull(reader.GetOrdinal("ProductID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ProductID"));
             ProductName = reader.IsDBNull(reader.GetOrdinal("ProductName")) ? null : reader.GetString(reader.GetOrdinal("ProductName"));
             ProductDescription = reader.IsDBNull(reader.GetOrdinal("ProductDescription")) ? null : reader.GetString(reader.GetOrdinal("ProductDescription"));
-            Category = reader.IsDBNull(reader.GetOrdinal("Category")) ? null : reader.GetString(reader.GetOrdinal("Category"));
             Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("Price"));
             Quantity = reader.IsDBNull(reader.GetOrdinal("Quantity")) ? 0 : reader.GetInt32(reader.GetOrdinal("Quantity"));
+            Action = reader.IsDBNull(reader.GetOrdinal("Action")) ? null : reader.GetString(reader.GetOrdinal("Action"));
         }
 
         public void SaveOrder()
@@ -173,15 +172,15 @@ namespace AHIFventory
                 if (OrderID == 0)
                 {
                     // Insert new order
-                    query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, ProductDescription, Category, Price, Quantity) 
-                              VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @ProductDescription, @Category, @Price, @Quantity)";
+                    query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, ProductDescription, Price, Quantity, Action) 
+                              VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @ProductDescription, @Price, @Quantity, @Action)";
                 }
                 else
                 {
                     // Update existing order
                     query = @"UPDATE tblOrder 
                               SET OrderDate = @OrderDate, Supplier = @Supplier, ProductID = @ProductID, ProductName = @ProductName, 
-                                  ProductDescription = @ProductDescription, Category = @Category, Price = @Price, Quantity = @Quantity 
+                                  ProductDescription = @ProductDescription, Price = @Price, Quantity = @Quantity, Action = @Action 
                               WHERE OrderID = @OrderID";
                 }
 
@@ -193,9 +192,9 @@ namespace AHIFventory
                     command.Parameters.AddWithValue("@ProductID", ProductID);
                     command.Parameters.AddWithValue("@ProductName", ProductName ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@ProductDescription", ProductDescription ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Category", Category ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Price", Price);
                     command.Parameters.AddWithValue("@Quantity", Quantity);
+                    command.Parameters.AddWithValue("@Action", Action ?? (object)DBNull.Value);
 
                     command.ExecuteNonQuery();
                 }
@@ -210,10 +209,10 @@ namespace AHIFventory
                 }
             }
 
-            OrderViewModel.LoadOrders();
+            //OrderViewModel.LoadOrders();
         }
 
-        public void DeleteProduct()
+        public void DeleteOrder()
         {
             if (ProductID == null)
             {
@@ -233,7 +232,7 @@ namespace AHIFventory
                 }
             }
 
-            OrderViewModel.LoadOrders();
+            //OrderViewModel.LoadOrders();
         }
     }
 }

@@ -36,10 +36,7 @@ namespace AHIFventory
             }
             */
 
-            ProductViewModel.LoadProducts();
-
             UpdateList();
-
             ProductViewModel.Products.CollectionChanged += Products_CollectionChanged;
         }
 
@@ -67,7 +64,8 @@ namespace AHIFventory
 
             if (editProductWindow.SaveOnClose)
             {
-                editProductWindow.ProductObject.SaveProduct();
+                //editProductWindow.ProductObject.SaveProduct();
+                ProductViewModel.Products.Add(editProductWindow.ProductObject);
             }
         }
     }

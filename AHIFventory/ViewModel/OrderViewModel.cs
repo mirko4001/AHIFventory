@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AHIFventory.ViewModel
+namespace AHIFventory
 {
     public class OrderViewModel
     {
 
         public static ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
+        public static ObservableCollection<Order> OrdersToDelete { get; set; } = new ObservableCollection<Order>();
 
         public OrderViewModel() { }
 
@@ -38,6 +39,13 @@ namespace AHIFventory.ViewModel
             
         public static void SaveOrders()
         {
+            foreach (Order order in OrdersToDelete)
+            {
+                order.DeleteOrder();
+            }
+
+            OrdersToDelete.Clear();
+
             foreach (Order order in Orders)
             {
                 order.SaveOrder();

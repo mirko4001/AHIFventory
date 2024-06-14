@@ -76,7 +76,9 @@ namespace AHIFventory
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            OrderObject.DeleteProduct();
+            //OrderObject.DeleteOrder();
+            OrderViewModel.OrdersToDelete.Add(OrderObject);
+            OrderViewModel.Orders.Remove(OrderObject);
         }
     }
 }

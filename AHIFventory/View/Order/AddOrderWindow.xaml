@@ -1,0 +1,79 @@
+﻿<Window x:Class="AHIFventory.AddOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AHIFventory"
+        mc:Ignorable="d"
+        Title="AddOrderWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Supplier" VerticalAlignment="Center" Margin="10" />
+            <TextBox Text="{Binding OrderObject.Supplier, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+        </Grid>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Supplier" VerticalAlignment="Center" Margin="10" />
+            <TextBox Text="{Binding OrderObject.Supplier, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Quantity" VerticalAlignment="Center" Margin="10" />
+            <TextBox Text="{Binding OrderObject.Quantity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Order Date" VerticalAlignment="Center" Margin="10" />
+            <DatePicker SelectedDate="{Binding OrderObject.OrderDate, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10" />
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Action" VerticalAlignment="Center" Margin="10" />
+
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"
+                      SelectedValue="{Binding OrderObject.Action, Mode=TwoWay}" SelectedValuePath="Content" SelectedIndex="0">
+                <ComboBoxItem Content="Buy" />
+                <ComboBoxItem Content="Sell" />
+            </ComboBox>
+        </Grid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" />
+            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" IsCancel="True" Click="OkButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

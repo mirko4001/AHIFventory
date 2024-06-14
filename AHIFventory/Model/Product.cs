@@ -245,7 +245,7 @@ namespace AHIFventory
                 }
             }
 
-            ProductViewModel.LoadProducts();
+            //ProductViewModel.LoadProducts();
         }
 
         public void DeleteProduct()
@@ -268,7 +268,7 @@ namespace AHIFventory
                 }
             }
 
-            ProductViewModel.LoadProducts();
+            //ProductViewModel.LoadProducts();
         }
 
     }
