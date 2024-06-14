@@ -9,6 +9,30 @@
       Title="OrderPage">
 
     <Grid Background="LightGray">
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Background="WhiteSmoke" CornerRadius="10" Margin="5">
+            <TextBlock Text="Orders" TextAlignment="Center" />
+        </Border>
+
+        <Border Grid.Row="1" Background="LightGray" CornerRadius="10" Margin="5">
+            <ScrollViewer>
+                <StackPanel x:Name="OrdersStackPanel">
+                    <local:OrderUserControl Margin="5" />
+                    <local:OrderUserControl Margin="5" />
+                    <local:OrderUserControl Margin="5" />
+                    <local:OrderUserControl Margin="5" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
     </Grid>
 </Page>

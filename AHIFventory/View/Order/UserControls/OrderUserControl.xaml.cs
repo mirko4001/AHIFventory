@@ -23,17 +23,31 @@ namespace AHIFventory
     {
         public bool isBuyOrder { get; set; } = true;
         public bool isSellOrder { get; set; } = false;
+        public Product ProductTemplate { get; set; }
         public Order OrderTemplate { get; set; }
+        public double OrderPrice { get; set; }
         public OrderUserControl()
         {
             InitializeComponent();
+
+            ProductTemplate = new Product("", "", "")
+            {
+                ProductID = 69,
+                Name = "Glas",
+                Description = "Product Description"
+            };
             OrderTemplate = new Order()
             {
+                OrderID = 0,
                 OrderDate = DateTime.Now,
                 Supplier = "Blum GmbH",
-                ProductID = 0,
+                ProductID = (int)ProductTemplate.ProductID,
+                Quantity = 5,
             };
-        }
 
+            OrderPrice = ProductTemplate.Price * OrderTemplate.Quantity;
+            DataContext = this;
+            OrderPrice = 100000;
+        }
     }
 }

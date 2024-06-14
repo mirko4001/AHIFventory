@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:AHIFventory"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800"
-             Background="White"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             Background="White">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
@@ -37,8 +36,8 @@
         </Border>
 
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding OrderTemplate.Supplier}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="Product" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
-        <TextBlock Grid.Column="2" Grid.Row="1" Text="Quantity" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
-        <TextBlock Grid.Column="3" Grid.Row="1" Text="Price" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding ProductTemplate.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding OrderTemplate.Quantity, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
+        <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding OrderPrice, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
     </Grid>
 </UserControl>

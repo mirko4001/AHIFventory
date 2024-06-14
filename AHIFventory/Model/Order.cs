@@ -81,6 +81,24 @@ namespace AHIFventory
             }
         }
 
+        private int quantity;
+        public int Quantity
+        {
+            get
+            {
+                return quantity;
+            }
+
+            set
+            {
+                if (quantity != value)
+                {
+                    quantity = value;
+                    onPropertyChanged("Quantity");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void onPropertyChanged(string propertyName)
         {
