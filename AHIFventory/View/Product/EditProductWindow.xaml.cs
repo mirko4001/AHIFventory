@@ -22,16 +22,52 @@ namespace AHIFventory
     {
         public bool SaveOnClose = false;
         public Product ProductObject { get; set; }
+        public Product ProductMain { get; set; }
 
         public EditProductWindow(Product product)
         {
             InitializeComponent();
-            ProductObject = product;
+
+            ProductObject = new Product()
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Stock = product.Stock,
+                ProductID = product.ProductID,
+                Price = product.Price,
+                StockWarning = product.StockWarning,
+                Image = product.Image,
+                Category = product.Category,
+            };
+
+            ProductMain = product;
+
+            DataContext = this;
+        }
+
+        public EditProductWindow()
+        {
+            InitializeComponent();
+
+            ProductObject = new Product("New Product", "Product Description", "");
+
             DataContext = this;
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductMain != null && ProductObject != null)
+            {
+                ProductMain.Name = ProductObject.Name;
+                ProductMain.Description = ProductObject.Description;
+                ProductMain.Stock = ProductObject.Stock;
+                ProductMain.ProductID = ProductObject.ProductID;
+                ProductMain.Price = ProductObject.Price;
+                ProductMain.StockWarning = ProductObject.StockWarning;
+                ProductMain.Image = ProductObject.Image;
+                ProductMain.Category = ProductObject.Category;
+            }
+
             SaveOnClose = true;
         }
     }

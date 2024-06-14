@@ -59,5 +59,16 @@ namespace AHIFventory
                 ProductsStackPanel.Children.Add(productUserControl);
             }
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditProductWindow editProductWindow = new EditProductWindow();
+            editProductWindow.ShowDialog();
+
+            if (editProductWindow.SaveOnClose)
+            {
+                editProductWindow.ProductObject.SaveProduct();
+            }
+        }
     }
 }

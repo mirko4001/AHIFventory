@@ -33,7 +33,7 @@
         </Border>
 
         <Border Grid.Row="1" Background="WhiteSmoke" CornerRadius="10" Margin="5">
-            <Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+            <Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="AddButton_Click" />
         </Border>
     </Grid>
 </Page>

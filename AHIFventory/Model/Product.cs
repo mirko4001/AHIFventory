@@ -169,6 +169,8 @@ namespace AHIFventory
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public Product() { }
+
         public Product(string name, string description, string image)
         { 
             this.Name = name;
@@ -242,6 +244,8 @@ namespace AHIFventory
                     }
                 }
             }
+
+            ProductViewModel.LoadProducts();
         }
 
         public void DeleteProduct()
