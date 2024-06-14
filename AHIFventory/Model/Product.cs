@@ -11,8 +11,8 @@ namespace AHIFventory
     public class Product : INotifyPropertyChanged
     {
 
-        private int productID;
-        public int ProductID
+        private int? productID;
+        public int? ProductID
         {
             get
             {
@@ -137,6 +137,24 @@ namespace AHIFventory
             }
         }
 
+        private string image;
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+
+            set
+            {
+                if (image != value)
+                {
+                    image = value;
+                    onPropertyChanged("Image");
+                }
+            }
+        }
+
         public bool LowOnStock
         {
             get
@@ -146,26 +164,30 @@ namespace AHIFventory
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void onPropertyChanged(string propertyName)
+        protected void onPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Product() { }
-
-        public void LoadProduct(SqliteDataReader reader)
-        {
-            ProductID = reader.GetInt32(reader.GetOrdinal("ProductID"));
-            Name = reader.GetString(reader.GetOrdinal("Name"));
-            Description = reader.GetString(reader.GetOrdinal("Description"));
-            Category = reader.GetString(reader.GetOrdinal("Category"));
-            Price = reader.GetInt32(reader.GetOrdinal("Price"));
-            Stock = reader.GetInt32(reader.GetOrdinal("Stock"));
-            StockWarning = reader.GetInt32(reader.GetOrdinal("StockWarning"));
+        public Product(string name, string description, string image)
+        { 
+            this.Name = name;
+            this.Description = description;
+            this.Image = image;
         }
+
+        public Product(SqliteDataReader reader)
+        {
+            ProductID = reader.IsDBNull(reader.GetOrdinal("ProductID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("ProductID"));
+            Name = reader.IsDBNull(reader.GetOrdinal("Name")) ? null : reader.GetString(reader.GetOrdinal("Name"));
+            Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description"));
+            Category = reader.IsDBNull(reader.GetOrdinal("Category")) ? null : reader.GetString(reader.GetOrdinal("Category"));
+            Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? 0 : reader.GetDouble(reader.GetOrdinal("Price"));
+            Stock = reader.IsDBNull(reader.GetOrdinal("Stock")) ? 0 : reader.GetInt32(reader.GetOrdinal("Stock"));
+            StockWarning = reader.IsDBNull(reader.GetOrdinal("StockWarning")) ? 0 : reader.GetInt32(reader.GetOrdinal("StockWarning"));
+            Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? null : reader.GetString(reader.GetOrdinal("Image"));
+        }
+
 
         public void SaveProduct()
         {
@@ -173,21 +195,76 @@ namespace AHIFventory
             {
                 connection.Open();
 
-                string query = "INSERT INTO Products (ProductID, Name, Description, Category, Price, Stock, StockWarning) VALUES (@ProductID, @Name, @Description, @Category, @Price, @Stock, @StockWarning)";
+                string query;
+
+                // Check if this is a new product or an existing one
+                if (ProductID == null)
+                {
+                    // Insert new product
+                    query = @"INSERT INTO tblProduct (Name, Description, Category, Price, Stock, StockWarning, Image) 
+                      VALUES (@Name, @Description, @Category, @Price, @Stock, @StockWarning, @Image)";
+                }
+                else
+                {
+                    // Update existing product
+                    query = @"UPDATE tblProduct 
+                      SET Name = @Name, Description = @Description, Category = @Category, Price = @Price, 
+                          Stock = @Stock, StockWarning = @StockWarning, Image = @Image 
+                      WHERE ProductID = @ProductID";
+                }
 
                 using (var command = new SqliteCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ProductID", this.ProductID);
-                    command.Parameters.AddWithValue("@Name", this.Name);
-                    command.Parameters.AddWithValue("@Description", this.Description);
-                    command.Parameters.AddWithValue("@Category", this.Category);
-                    command.Parameters.AddWithValue("@Price", this.Price);
-                    command.Parameters.AddWithValue("@Stock", this.Stock);
-                    command.Parameters.AddWithValue("@StockWarning", this.StockWarning);
+                    // Add parameters to the command
+                    command.Parameters.AddWithValue("@Name", Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Description", Description ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Category", Category ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Price", Price);
+                    command.Parameters.AddWithValue("@Stock", Stock);
+                    command.Parameters.AddWithValue("@StockWarning", StockWarning);
+                    command.Parameters.AddWithValue("@Image", Image ?? (object)DBNull.Value);
+
+                    if (ProductID != null)
+                    {
+                        command.Parameters.AddWithValue("@ProductID", ProductID);
+                    }
 
                     command.ExecuteNonQuery();
                 }
+
+                // If this was a new product, get the last inserted ID
+                if (ProductID == null)
+                {
+                    query = "SELECT last_insert_rowid()";
+                    using (var command = new SqliteCommand(query, connection))
+                    {
+                        ProductID = (int)(long)command.ExecuteScalar();
+                    }
+                }
             }
+        }
+
+        public void DeleteProduct()
+        {
+            if (ProductID == null)
+            {
+                //throw new InvalidOperationException("Product ID cannot be null when deleting a product.");
+                return;
+            }
+
+            using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
+            {
+                connection.Open();
+                var query = "DELETE FROM tblProduct WHERE ProductID = @ProductID";
+
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductID", ProductID);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            ProductViewModel.LoadProducts();
         }
 
     }

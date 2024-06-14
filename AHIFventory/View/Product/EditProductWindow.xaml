@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AHIFventory"
         mc:Ignorable="d"
-        Title="EditProductWindow" Height="400" Width="650">
+        Title="EditProductWindow" Height="500" Width="700">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -15,6 +15,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -24,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Name" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="NameTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBox Text="{Binding ProductObject.Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -34,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Description" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="DescriptionTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBox Text="{Binding ProductObject.Description, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -44,7 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Category" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="CategoryTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBox Text="{Binding ProductObject.Category, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -54,7 +57,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Price" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="PriceTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBox Text="{Binding ProductObject.Price, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="4">
@@ -64,7 +67,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Stock" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="StockTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBox Text="{Binding ProductObject.Stock, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="5">
@@ -73,9 +76,23 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="StockWarning" VerticalAlignment="Center" Margin="10" />
-            <TextBox x:Name="StockWarningTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <TextBlock Text="Warning" TextWrapping="Wrap" VerticalAlignment="Center" Margin="10" />
+            <TextBox Text="{Binding ProductObject.StockWarning, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Image" TextWrapping="Wrap" VerticalAlignment="Center" Margin="10" />
+            <TextBox Text="{Binding ProductObject.Image, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+        </Grid>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" />
+            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" IsCancel="True" Click="OkButton_Click" />
+        </StackPanel>
     </Grid>
 </Window>

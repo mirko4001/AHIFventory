@@ -21,18 +21,29 @@ namespace AHIFventory
     /// </summary>
     public partial class ProductUserControl : UserControl
     {
+        public Product ProductObject { get; set; }
 
-        public Product product;
-
-        public ProductUserControl()
+        public ProductUserControl(Product product)
         {
             InitializeComponent();
+            ProductObject = product;
+            DataContext = this;
         }
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            EditProductWindow editProductWindow = new EditProductWindow();
+            EditProductWindow editProductWindow = new EditProductWindow(ProductObject);
             editProductWindow.ShowDialog();
+
+            if (editProductWindow.SaveOnClose)
+            {
+                ProductObject.SaveProduct();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductObject.DeleteProduct();
         }
     }
 }

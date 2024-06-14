@@ -10,12 +10,14 @@ namespace AHIFventory
 {
     public class ProductViewModel
     {
-        public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
+        public static ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
 
         public ProductViewModel() { }
 
-        public void LoadProducts()
+        public static void LoadProducts()
         {
+            Products.Clear();
+
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
@@ -26,15 +28,14 @@ namespace AHIFventory
                 {
                     while (reader.Read())
                     {
-                        var product = new Product();
-                        product.LoadProduct(reader);
+                        var product = new Product(reader);
                         Products.Add(product);
                     }
                 }
             }
         }
 
-        public void SaveProducts()
+        public static void SaveProducts()
         {
             foreach (Product product in Products) 
             {

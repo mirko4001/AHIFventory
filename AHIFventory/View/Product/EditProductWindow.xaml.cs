@@ -17,11 +17,22 @@ namespace AHIFventory
     /// <summary>
     /// Interaction logic for EditProductWindow.xaml
     /// </summary>
+
     public partial class EditProductWindow : Window
     {
-        public EditProductWindow()
+        public bool SaveOnClose = false;
+        public Product ProductObject { get; set; }
+
+        public EditProductWindow(Product product)
         {
             InitializeComponent();
+            ProductObject = product;
+            DataContext = this;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveOnClose = true;
         }
     }
 }
