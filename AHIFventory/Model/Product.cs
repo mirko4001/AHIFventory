@@ -173,9 +173,9 @@ namespace AHIFventory
 
         public Product(string name, string description, string image)
         { 
-            this.Name = name;
-            this.Description = description;
-            this.Image = image;
+            Name = name;
+            Description = description;
+            Image = image;
         }
 
         public Product(SqliteDataReader reader)

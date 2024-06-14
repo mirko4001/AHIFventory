@@ -39,5 +39,7 @@
         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding ProductTemplate.Name}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
         <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding OrderTemplate.Quantity, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
         <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding OrderPrice, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0"/>
+
+        <Button x:Name="DeleteButton" Grid.Column="3" Content="Delete" HorizontalAlignment="Right" Margin="5" Click="DeleteButton_Click" />
     </Grid>
 </UserControl>

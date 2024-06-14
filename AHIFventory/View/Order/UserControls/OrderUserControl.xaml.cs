@@ -30,6 +30,7 @@ namespace AHIFventory
         {
             InitializeComponent();
 
+            /*
             ProductTemplate = new Product("", "", "")
             {
                 ProductID = 69,
@@ -46,8 +47,36 @@ namespace AHIFventory
             };
 
             OrderPrice = ProductTemplate.Price * OrderTemplate.Quantity;
+            */
+
             DataContext = this;
-            OrderPrice = 100000;
+        }
+
+        public Order OrderObject { get; set; }
+
+        public OrderUserControl(Order order)
+        {
+            InitializeComponent();
+            OrderObject = order;
+            DataContext = this;
+        }
+
+        /*
+        private async void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditProductWindow editProductWindow = new EditProductWindow(OrderObject);
+            editProductWindow.ShowDialog();
+
+            if (editProductWindow.SaveOnClose)
+            {
+                OrderObject.SaveProduct();
+            }
+        }
+        */
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            OrderObject.DeleteProduct();
         }
     }
 }

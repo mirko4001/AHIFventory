@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AHIFventory.ViewModel;
+using Microsoft.Data.Sqlite;
+using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHIFventory
 {
@@ -12,11 +10,7 @@ namespace AHIFventory
         private int orderID;
         public int OrderID
         {
-            get
-            {
-                return orderID;
-            }
-
+            get { return orderID; }
             set
             {
                 if (orderID != value)
@@ -30,11 +24,7 @@ namespace AHIFventory
         private DateTime orderDate;
         public DateTime OrderDate
         {
-            get
-            {
-                return orderDate;
-            }
-
+            get { return orderDate; }
             set
             {
                 if (orderDate != value)
@@ -48,11 +38,7 @@ namespace AHIFventory
         private string supplier;
         public string Supplier
         {
-            get
-            {
-                return supplier;
-            }
-
+            get { return supplier; }
             set
             {
                 if (supplier != value)
@@ -66,11 +52,7 @@ namespace AHIFventory
         private int productID;
         public int ProductID
         {
-            get
-            {
-                return productID;
-            }
-
+            get { return productID; }
             set
             {
                 if (productID != value)
@@ -81,14 +63,66 @@ namespace AHIFventory
             }
         }
 
+        private string productName;
+        public string ProductName
+        {
+            get { return productName; }
+            set
+            {
+                if (productName != value)
+                {
+                    productName = value;
+                    onPropertyChanged("ProductName");
+                }
+            }
+        }
+
+        private string productDescription;
+        public string ProductDescription
+        {
+            get { return productDescription; }
+            set
+            {
+                if (productDescription != value)
+                {
+                    productDescription = value;
+                    onPropertyChanged("ProductDescription");
+                }
+            }
+        }
+
+        private string category;
+        public string Category
+        {
+            get { return category; }
+            set
+            {
+                if (category != value)
+                {
+                    category = value;
+                    onPropertyChanged("Category");
+                }
+            }
+        }
+
+        private double price;
+        public double Price
+        {
+            get { return price; }
+            set
+            {
+                if (price != value)
+                {
+                    price = value;
+                    onPropertyChanged("Price");
+                }
+            }
+        }
+
         private int quantity;
         public int Quantity
         {
-            get
-            {
-                return quantity;
-            }
-
+            get { return quantity; }
             set
             {
                 if (quantity != value)
@@ -99,13 +133,107 @@ namespace AHIFventory
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         public void onPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Order() { }
+        
+        public Order(string productName, string productDescription, string category, string supplier)
+        {
+            ProductName = productName;
+            ProductDescription = productDescription;
+            Category = category;
+            Supplier = supplier;
+        }
+
+        public Order(SqliteDataReader reader)
+        {
+            OrderID = reader.IsDBNull(reader.GetOrdinal("OrderID")) ? 0 : reader.GetInt32(reader.GetOrdinal("OrderID"));
+            OrderDate = reader.IsDBNull(reader.GetOrdinal("OrderDate")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("OrderDate"));
+            Supplier = reader.IsDBNull(reader.GetOrdinal("Supplier")) ? null : reader.GetString(reader.GetOrdinal("Supplier"));
+            ProductID = reader.IsDBNull(reader.GetOrdinal("ProductID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ProductID"));
+            ProductName = reader.IsDBNull(reader.GetOrdinal("ProductName")) ? null : reader.GetString(reader.GetOrdinal("ProductName"));
+            ProductDescription = reader.IsDBNull(reader.GetOrdinal("ProductDescription")) ? null : reader.GetString(reader.GetOrdinal("ProductDescription"));
+            Category = reader.IsDBNull(reader.GetOrdinal("Category")) ? null : reader.GetString(reader.GetOrdinal("Category"));
+            Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("Price"));
+            Quantity = reader.IsDBNull(reader.GetOrdinal("Quantity")) ? 0 : reader.GetInt32(reader.GetOrdinal("Quantity"));
+        }
+
+        public void SaveOrder()
+        {
+            using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                connection.Open();
+
+                string query;
+
+                if (OrderID == 0)
+                {
+                    // Insert new order
+                    query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, ProductDescription, Category, Price, Quantity) 
+                              VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @ProductDescription, @Category, @Price, @Quantity)";
+                }
+                else
+                {
+                    // Update existing order
+                    query = @"UPDATE tblOrder 
+                              SET OrderDate = @OrderDate, Supplier = @Supplier, ProductID = @ProductID, ProductName = @ProductName, 
+                                  ProductDescription = @ProductDescription, Category = @Category, Price = @Price, Quantity = @Quantity 
+                              WHERE OrderID = @OrderID";
+                }
+
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderID", OrderID);
+                    command.Parameters.AddWithValue("@OrderDate", OrderDate);
+                    command.Parameters.AddWithValue("@Supplier", Supplier ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@ProductID", ProductID);
+                    command.Parameters.AddWithValue("@ProductName", ProductName ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@ProductDescription", ProductDescription ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Category", Category ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Price", Price);
+                    command.Parameters.AddWithValue("@Quantity", Quantity);
+
+                    command.ExecuteNonQuery();
+                }
+
+                if (OrderID == 0)
+                {
+                    query = "SELECT last_insert_rowid()";
+                    using (var command = new SqliteCommand(query, connection))
+                    {
+                        OrderID = (int)(long)command.ExecuteScalar();
+                    }
+                }
             }
+
+            OrderViewModel.LoadOrders();
+        }
+
+        public void DeleteProduct()
+        {
+            if (ProductID == null)
+            {
+                //throw new InvalidOperationException("Product ID cannot be null when deleting a product.");
+                return;
+            }
+
+            using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
+            {
+                connection.Open();
+                var query = "DELETE FROM tblOrder WHERE OrderID = @OrderID";
+
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderID", OrderID);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            OrderViewModel.LoadOrders();
         }
     }
 }
