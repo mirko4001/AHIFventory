@@ -16,6 +16,8 @@ namespace AHIFventory
 
         public static void LoadProducts()
         {
+            Products.Clear();
+
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();

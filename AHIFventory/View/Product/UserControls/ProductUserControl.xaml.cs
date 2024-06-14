@@ -40,5 +40,10 @@ namespace AHIFventory
                 ProductObject.SaveProduct();
             }
         }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductObject.DeleteProduct();
+        }
     }
 }

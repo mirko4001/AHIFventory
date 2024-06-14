@@ -31,7 +31,11 @@
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.StockWarning, StringFormat=Stock Warning: {0}}" />
             </StackPanel>
 
-            <Button x:Name="EditButton" Content="Edit" Grid.Column="2" Foreground="Black" Click="EditButton_Click" Margin="5" />
+            <StackPanel Grid.Column="2" >
+                <Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" />
+                <Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" />
+            </StackPanel>
+            
         </Grid>
     </Border>
 

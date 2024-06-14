@@ -164,12 +164,9 @@ namespace AHIFventory
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void onPropertyChanged(string propertyName)
+        protected void onPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public Product(string name, string description, string image)
@@ -247,6 +244,28 @@ namespace AHIFventory
             }
         }
 
+        public void DeleteProduct()
+        {
+            if (ProductID == null)
+            {
+                //throw new InvalidOperationException("Product ID cannot be null when deleting a product.");
+                return;
+            }
+
+            using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
+            {
+                connection.Open();
+                var query = "DELETE FROM tblProduct WHERE ProductID = @ProductID";
+
+                using (var command = new SqliteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductID", ProductID);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            ProductViewModel.LoadProducts();
+        }
 
     }
 }
