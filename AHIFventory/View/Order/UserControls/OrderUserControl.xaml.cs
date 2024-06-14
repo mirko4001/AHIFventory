@@ -30,18 +30,18 @@ namespace AHIFventory
         {
             InitializeComponent();
 
-            ProductTemplate = new Product()
+            ProductTemplate = new Product("", "", "")
             {
                 ProductID = 69,
                 Name = "Glas",
-                Description = "Product Description",
+                Description = "Product Description"
             };
             OrderTemplate = new Order()
             {
                 OrderID = 0,
                 OrderDate = DateTime.Now,
                 Supplier = "Blum GmbH",
-                ProductID = ProductTemplate.ProductID,
+                ProductID = (int)ProductTemplate.ProductID,
                 Quantity = 5,
             };
 
