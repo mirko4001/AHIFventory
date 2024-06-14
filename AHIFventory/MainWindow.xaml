@@ -44,7 +44,7 @@
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
-                <ui:NavigationViewItem Content="Orders" >
+                <ui:NavigationViewItem Content="Orders" TargetPageType="{x:Type local:OrderPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Desktop24" FontSize="30" Height="50"/>
                     </ui:NavigationViewItem.Icon>
