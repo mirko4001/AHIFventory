@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800" >
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </UserControl.Resources>
+
     <Border Background="WhiteSmoke" CornerRadius="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -32,6 +36,9 @@
             <StackPanel Grid.Column="2" >
                 <Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" />
                 <Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" />
+                <Border x:Name="BuyBorder" CornerRadius="5" Background="Red" Margin="8" Visibility="{Binding ProductObject.LowOnStock, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock Text="LOW ON STOCK" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Padding="5"/>
+                </Border>
             </StackPanel>
             
         </Grid>

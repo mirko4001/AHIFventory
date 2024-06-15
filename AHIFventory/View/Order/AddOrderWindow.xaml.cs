@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
 namespace AHIFventory
 {
@@ -22,7 +23,6 @@ namespace AHIFventory
         public bool SaveOnClose = false;
         public Order OrderObject { get; set; }
         public Product ProductObject { get; set; }
-
 
         public AddOrderWindow()
         {
@@ -63,7 +63,7 @@ namespace AHIFventory
                 }
                 else
                 {
-                    MessageBox.Show("Not enough Stock");
+                    GlobalFunction.ShowCustomMessageBox("Warning", "Not enough Stock");
                     return;
                 }
             }

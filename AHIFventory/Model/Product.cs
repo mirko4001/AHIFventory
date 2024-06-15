@@ -141,7 +141,14 @@ namespace AHIFventory
         {
             get
             {
-                return Stock <= StockWarning;
+                bool value = Stock <= StockWarning;
+
+                if (value)
+                {
+                    // TO DO: Notication
+                }
+
+                return value;
             }
         }
 

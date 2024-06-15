@@ -24,7 +24,6 @@ namespace AHIFventory
         public bool isBuyOrder { get; set; } = true;
         public bool isSellOrder { get; set; } = false;
         public Order OrderObject { get; set; }
-
         public OrderUserControl(Order order)
         {
             InitializeComponent();
@@ -52,33 +51,43 @@ namespace AHIFventory
         }
         */
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void Delete()
         {
+            DeleteOrderFlyout.IsOpen = false;
+            OrderViewModel.OrdersToDelete.Add(OrderObject);
+            OrderViewModel.Orders.Remove(OrderObject);
+        }
 
-            var dialog = new DeleteOrderConfirmationDialogWindow();
-            dialog.ShowDialog();
+        private void DeleteNoButton_Click(object sender, RoutedEventArgs e)
+        {
+            Delete();
+        }
 
-            if (dialog.IsConfirmed)
+        private void DeleteYesButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Product product in ProductViewModel.Products)
             {
-                foreach (Product product in ProductViewModel.Products) 
+                if (product.Name == OrderObject.ProductName)
                 {
-                    if (product.Name == OrderObject.ProductName)
+                    if (OrderObject.Action == "Buy")
                     {
-                        if (OrderObject.Action == "Buy")
-                        {
-                            product.Stock -= OrderObject.Quantity;
-                        }
-                        else
-                        {
-                            product.Stock += OrderObject.Quantity;
-                        }
+                        product.Stock -= OrderObject.Quantity;
                     }
+                    else
+                    {
+                        product.Stock += OrderObject.Quantity;
+                    }
+
+                    break;
                 }
             }
 
-            //OrderObject.DeleteOrder();
-            OrderViewModel.OrdersToDelete.Add(OrderObject);
-            OrderViewModel.Orders.Remove(OrderObject);
+            Delete();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteOrderFlyout.IsOpen = true;
         }
     }
 }
