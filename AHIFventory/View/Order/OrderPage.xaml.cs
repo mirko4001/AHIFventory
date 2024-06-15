@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace AHIFventory
     {
         public OrderPage()
         {
+            Log.Information("Initializing order page");
             InitializeComponent();
 
             UpdateList();
@@ -35,6 +37,8 @@ namespace AHIFventory
 
         public void UpdateList()
         {
+            Log.Information("Updating orders stackpanel");
+
             OrdersStackPanel.Children.Clear();
 
             var sortedOrders = OrderViewModel.Orders.OrderByDescending(order => order.OrderDate);
@@ -49,8 +53,11 @@ namespace AHIFventory
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Add order button has been clicked");
+
             if (ProductViewModel.Products.Count <= 0)
             {
+                Log.Warning("You need atleast one product to make an order.");
                 GlobalFunction.ShowCustomMessageBox("Warning", "You need atleast one product to make an order.");
                 return;
             }

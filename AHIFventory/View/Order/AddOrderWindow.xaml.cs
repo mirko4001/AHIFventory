@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace AHIFventory
 
         public AddOrderWindow()
         {
+            Log.Information("Initializing add order window");
+
             InitializeComponent();
 
             foreach (Product product in ProductViewModel.Products)
@@ -51,6 +54,7 @@ namespace AHIFventory
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Add order has been confirmed");
 
             OrderObject.Price = ProductObject.Price * OrderObject.Quantity;
             OrderObject.ProductName = ProductObject.Name;

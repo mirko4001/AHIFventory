@@ -38,6 +38,8 @@ namespace AHIFventory
         {
             ProductViewModel.SaveProducts();
             OrderViewModel.SaveOrders();
+
+            Log.CloseAndFlush();
         }
     }
 }

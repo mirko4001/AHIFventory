@@ -44,8 +44,9 @@ namespace AHIFventory
             
         public static void SaveOrders()
         {
-            Log.Information("Saving orders to sql file");
+            Log.Information("Saving orders");
 
+            Log.Debug("Deleting all orders inside delete collection");
             foreach (Order order in OrdersToDelete)
             {
                 order.DeleteOrder();
@@ -53,6 +54,7 @@ namespace AHIFventory
 
             OrdersToDelete.Clear();
 
+            Log.Debug("Saving all orders inside collection");
             foreach (Order order in Orders)
             {
                 order.SaveOrder();
