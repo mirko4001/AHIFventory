@@ -24,18 +24,6 @@ namespace AHIFventory
         {
             InitializeComponent();
 
-            /*
-            for (int i = 0; i < 5; i++)
-            {
-                Order order = new Order("", "", "", "");
-                order.SaveOrder();
-
-                OrderUserControl productUserControl = new OrderUserControl(order);
-                productUserControl.Margin = new Thickness(5);
-                OrdersStackPanel.Children.Add(productUserControl);
-            }
-            */
-
             UpdateList();
             OrderViewModel.Orders.CollectionChanged += Orders_CollectionChanged;
         }
@@ -49,7 +37,9 @@ namespace AHIFventory
         {
             OrdersStackPanel.Children.Clear();
 
-            foreach (Order order in OrderViewModel.Orders)
+            var sortedOrders = OrderViewModel.Orders.OrderByDescending(order => order.OrderDate);
+
+            foreach (Order order in sortedOrders)
             {
                 OrderUserControl orderUserControl = new OrderUserControl(order);
                 orderUserControl.Margin = new Thickness(5);

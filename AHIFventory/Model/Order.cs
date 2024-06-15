@@ -154,15 +154,15 @@ namespace AHIFventory
                 if (OrderID == 0)
                 {
                     // Insert new order
-                    query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, ProductDescription, Price, Quantity, Action) 
-                              VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @ProductDescription, @Price, @Quantity, @Action)";
+                    query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, Price, Quantity, Action) 
+                              VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @Price, @Quantity, @Action)";
                 }
                 else
                 {
                     // Update existing order
                     query = @"UPDATE tblOrder 
                               SET OrderDate = @OrderDate, Supplier = @Supplier, ProductID = @ProductID, ProductName = @ProductName, 
-                                  ProductDescription = @ProductDescription, Price = @Price, Quantity = @Quantity, Action = @Action 
+                                  Price = @Price, Quantity = @Quantity, Action = @Action 
                               WHERE OrderID = @OrderID";
                 }
 
