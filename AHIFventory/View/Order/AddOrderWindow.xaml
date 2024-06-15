@@ -35,7 +35,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Quantity" VerticalAlignment="Center" Margin="10" />
-            <ui:TextBox PlaceholderText="Enter quantity" Text="{Binding OrderObject.Quantity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:NumberBox MaxDecimalPlaces="0" PlaceholderText="Enter quantity" Text="{Binding OrderObject.Quantity}" Value="{Binding OrderObject.Quantity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="2">

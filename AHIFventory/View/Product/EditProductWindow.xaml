@@ -46,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Price" VerticalAlignment="Center" Margin="10" />
-            <ui:TextBox PlaceholderText="Enter product price per unit" Text="{Binding ProductObject.Price, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:NumberBox MaxDecimalPlaces="2" PlaceholderText="Enter product price per unit" Text="{Binding ProductObject.Price}" Value="{Binding ProductObject.Price, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -56,7 +56,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Stock" VerticalAlignment="Center" Margin="10" />
-            <ui:TextBox PlaceholderText="Enter stock ammount" Text="{Binding ProductObject.Stock, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:NumberBox MaxDecimalPlaces="0" PlaceholderText="Enter stock ammount" Text="{Binding ProductObject.Stock, Mode=TwoWay}" Value="{Binding ProductObject.Stock, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="4">

@@ -78,6 +78,12 @@ namespace AHIFventory
                 if (price != value)
                 {
                     price = value;
+
+                    if (price < 0)
+                    {
+                        price = 0;
+                    }
+
                     onPropertyChanged("Price");
                 }
             }
@@ -96,6 +102,12 @@ namespace AHIFventory
                 if (stock != value)
                 {
                     stock = value;
+
+                    if (stock < 0)
+                    {
+                        stock = 0;
+                    }
+
                     onPropertyChanged("Stock");
                 }
             }
@@ -114,6 +126,12 @@ namespace AHIFventory
                 if (stockWarning != value)
                 {
                     stockWarning = value;
+
+                    if (stock < 0)
+                    {
+                        stock = 0;
+                    }
+
                     onPropertyChanged("StockWarning");
                 }
             }
