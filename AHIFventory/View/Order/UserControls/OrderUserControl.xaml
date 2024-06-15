@@ -53,18 +53,18 @@
                     Placement="Top">
                 <StackPanel>
                     <TextBlock
-                            Width="280"
+                            Width="200"
                             HorizontalAlignment="Left"
                             Text="Do you want to revert the changes?"
                             TextWrapping="WrapWithOverflow" />
-                    <Button Margin="0,8,0,0" Content="Yes" x:Name="DeleteYesButton" Click="DeleteYesButton_Click" />
-                    <Button Margin="0,8,0,0" Content="No" x:Name="DeleteNoButton" Click="DeleteNoButton_Click"/>
+                    <ui:Button Margin="0,5,0,0" Content="Yes" x:Name="DeleteYesButton" Click="DeleteYesButton_Click" ToolTipService.ToolTip="Reverts order changes" />
+                    <ui:Button Margin="0,5,0,0" Content="No" x:Name="DeleteNoButton" Click="DeleteNoButton_Click"  ToolTipService.ToolTip="Doesn't revert order changes"/>
                 </StackPanel>
             </ui:Flyout>
-            <Button
+            <ui:Button
                 Click="DeleteButton_Click"
                     Grid.Row="1" x:Name="DeleteButton" 
-                    Content="Delete" />
+                    Content="Delete" Icon="{ui:SymbolIcon Delete48}" ToolTipService.ToolTip="Delete order" />
         </Grid>
     </Grid>
 </UserControl>

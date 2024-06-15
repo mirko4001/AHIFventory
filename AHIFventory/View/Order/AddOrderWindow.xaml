@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AHIFventory"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="AddOrderWindow" Height="450" Width="800">
     <Grid>
@@ -24,17 +25,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Supplier" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding OrderObject.Supplier, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
-        </Grid>
-
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Supplier" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding OrderObject.Supplier, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter supplier name" Text="{Binding OrderObject.Supplier, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -44,7 +35,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Quantity" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding OrderObject.Quantity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter quantity" Text="{Binding OrderObject.Quantity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -81,14 +72,14 @@
             <TextBlock Text="Product" VerticalAlignment="Center" Margin="10" />
 
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"
-              SelectedValue="{Binding ProductObject, Mode=TwoWay}" SelectedValuePath="Content" x:Name="ProductComboBox">
+              SelectedValue="{Binding ProductObject, Mode=TwoWay}" SelectedValuePath="Content" x:Name="ProductComboBox" IsEditable="True">
                 
             </ComboBox>
         </Grid>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" />
-            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" Click="OkButton_Click" />
+            <ui:Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" ToolTipService.ToolTip="Cancel action" />
+            <ui:Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" Click="OkButton_Click" ToolTipService.ToolTip="Confirm action" />
         </StackPanel>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AHIFventory"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800" >
 
@@ -23,7 +24,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="{Binding ProductObject.Image}" Margin="5" />
+            <ui:Image CornerRadius="4" BorderBrush="#33000000"  Source="{Binding ProductObject.Image}" Margin="5" />
 
             <StackPanel Grid.Column="1">
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Name: {0}}" TextWrapping="Wrap" Margin="5" />
@@ -34,8 +35,8 @@
             </StackPanel>
 
             <StackPanel Grid.Column="2" >
-                <Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" />
-                <Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" />
+                <ui:Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" Icon="{ui:SymbolIcon Edit48}" ToolTipService.ToolTip="Edit product" />
+                <ui:Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" Icon="{ui:SymbolIcon Delete48}" ToolTipService.ToolTip="Delete product" />
                 <Border x:Name="BuyBorder" CornerRadius="5" Background="Red" Margin="8" Visibility="{Binding ProductObject.LowOnStock, Converter={StaticResource BoolToVisibility}}">
                     <TextBlock Text="LOW ON STOCK" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Padding="5"/>
                 </Border>

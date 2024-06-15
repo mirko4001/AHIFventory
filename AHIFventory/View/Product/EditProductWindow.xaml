@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AHIFventory"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="EditProductWindow" Height="500" Width="700">
     <Grid>
@@ -25,7 +26,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Name" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter product name" Text="{Binding ProductObject.Name, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -35,7 +36,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Description" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.Description, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter product description" Text="{Binding ProductObject.Description, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10" TextWrapping="Wrap" />
         </Grid>
 
         <Grid Grid.Row="2">
@@ -45,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Price" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.Price, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter product price per unit" Text="{Binding ProductObject.Price, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -55,7 +56,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Stock" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.Stock, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter stock ammount" Text="{Binding ProductObject.Stock, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="4">
@@ -65,7 +66,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Warning" TextWrapping="Wrap" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.StockWarning, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter product stock warning limit" Text="{Binding ProductObject.StockWarning, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <Grid Grid.Row="5">
@@ -75,12 +76,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Image" TextWrapping="Wrap" VerticalAlignment="Center" Margin="10" />
-            <TextBox Text="{Binding ProductObject.Image, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
+            <ui:TextBox PlaceholderText="Enter product image link or path" Text="{Binding ProductObject.Image, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"/>
         </Grid>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" />
-            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" IsCancel="True" Click="OkButton_Click" />
+            <ui:Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" ToolTipService.ToolTip="Cancel action" />
+            <ui:Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" IsCancel="True" Click="OkButton_Click" ToolTipService.ToolTip="Confirm action" />
         </StackPanel>
     </Grid>
 </Window>
