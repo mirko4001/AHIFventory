@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace AHIFventory
 
         public EditProductWindow(Product product)
         {
+            Log.Information("Initializing edit product window");
+
             InitializeComponent();
 
             ProductObject = new Product(product.Name, product.Description, product.Image)
@@ -43,6 +46,8 @@ namespace AHIFventory
 
         public EditProductWindow()
         {
+            Log.Information("Initializing edit product window");
+
             InitializeComponent();
 
             ProductObject = new Product("New Product", "Product Description", "");
@@ -52,6 +57,8 @@ namespace AHIFventory
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Product changes confirmed");
+
             if (ProductMain != null && ProductObject != null)
             {
                 ProductMain.Name = ProductObject.Name;

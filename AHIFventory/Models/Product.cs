@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AHIFventory
 {
@@ -109,6 +110,7 @@ namespace AHIFventory
                     }
 
                     onPropertyChanged("Stock");
+                    onPropertyChanged("LowOnStock");
                 }
             }
         }
@@ -127,12 +129,13 @@ namespace AHIFventory
                 {
                     stockWarning = value;
 
-                    if (stock < 0)
+                    if (stockWarning < 0)
                     {
-                        stock = 0;
+                        stockWarning = 0;
                     }
 
                     onPropertyChanged("StockWarning");
+                    onPropertyChanged("LowOnStock");
                 }
             }
         }
@@ -155,6 +158,21 @@ namespace AHIFventory
             }
         }
 
+        private bool notificationSent;
+        public bool NotificationSent
+        {
+            get
+            {
+                return notificationSent;
+            }
+
+            set
+            {
+                notificationSent = value;
+                onPropertyChanged("NotificationSent");
+            }
+        }
+
         public bool LowOnStock
         {
             get
@@ -163,7 +181,19 @@ namespace AHIFventory
 
                 if (value)
                 {
-                    // TO DO: Notication
+                    if (!NotificationSent)
+                    {
+                        MessageBox.Show("(temp) low on stock notification");
+                        GlobalFunction.ShowToastNotification("Warning", $"Product '{name}' is low on stock.");
+                        NotificationSent = true;
+                    }
+                }
+                else
+                {
+                    if (NotificationSent)
+                    {
+                        NotificationSent = false;
+                    }
                 }
 
                 return value;
@@ -181,6 +211,7 @@ namespace AHIFventory
             Name = name;
             Description = description;
             Image = image;
+            NotificationSent = false;
         }
 
         public Product(SqliteDataReader reader)
@@ -192,6 +223,7 @@ namespace AHIFventory
             Stock = reader.IsDBNull(reader.GetOrdinal("Stock")) ? 0 : reader.GetInt32(reader.GetOrdinal("Stock"));
             StockWarning = reader.IsDBNull(reader.GetOrdinal("StockWarning")) ? 0 : reader.GetInt32(reader.GetOrdinal("StockWarning"));
             Image = reader.IsDBNull(reader.GetOrdinal("Image")) ? null : reader.GetString(reader.GetOrdinal("Image"));
+            NotificationSent = reader.IsDBNull(reader.GetOrdinal("NotificationSent")) ? false : reader.GetBoolean(reader.GetOrdinal("NotificationSent"));
         }
 
 
@@ -207,15 +239,15 @@ namespace AHIFventory
                 if (ProductID == null)
                 {
                     // Insert new product
-                    query = @"INSERT INTO tblProduct (Name, Description, Price, Stock, StockWarning, Image) 
-                      VALUES (@Name, @Description, @Price, @Stock, @StockWarning, @Image)";
+                    query = @"INSERT INTO tblProduct (Name, Description, Price, Stock, StockWarning, Image, NotificationSent) 
+                      VALUES (@Name, @Description, @Price, @Stock, @StockWarning, @Image, @NotificationSent)";
                 }
                 else
                 {
                     // Update existing product
                     query = @"UPDATE tblProduct 
                       SET Name = @Name, Description = @Description, Price = @Price, 
-                          Stock = @Stock, StockWarning = @StockWarning, Image = @Image 
+                          Stock = @Stock, StockWarning = @StockWarning, Image = @Image, NotificationSent = @NotificationSent
                       WHERE ProductID = @ProductID";
                 }
 
@@ -228,6 +260,8 @@ namespace AHIFventory
                     command.Parameters.AddWithValue("@Stock", Stock);
                     command.Parameters.AddWithValue("@StockWarning", StockWarning);
                     command.Parameters.AddWithValue("@Image", Image ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@NotificationSent", NotificationSent);
+
 
                     if (ProductID != null)
                     {

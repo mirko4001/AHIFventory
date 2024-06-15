@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,8 +18,12 @@ namespace AHIFventory
 
         public static void LoadProducts()
         {
+            Log.Information("Loading products");
+
+            Log.Debug("Clearing all products from collection");
             Products.Clear();
 
+            Log.Debug("Importing all products from sql file");
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
@@ -38,6 +43,9 @@ namespace AHIFventory
 
         public static void SaveProducts()
         {
+            Log.Information("Saving products");
+
+            Log.Debug("Deleting all products inside delete collection");
             foreach (Product product in ProductsToDelete)
             {
                 product.DeleteProduct();
@@ -45,6 +53,7 @@ namespace AHIFventory
 
             ProductsToDelete.Clear();
 
+            Log.Debug("Saving all products inside collection");
             foreach (Product product in Products) 
             {
                 product.SaveProduct();

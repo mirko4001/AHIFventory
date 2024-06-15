@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,13 +26,19 @@ namespace AHIFventory
 
         public ProductUserControl(Product product)
         {
+            Log.Information("Initializing product user control");
+
             InitializeComponent();
+
             ProductObject = product;
+
             DataContext = this;
         }
 
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Edit product button has been clicked");
+
             EditProductWindow editProductWindow = new EditProductWindow(ProductObject);
             editProductWindow.ShowDialog();
 
@@ -43,6 +50,8 @@ namespace AHIFventory
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Delete product button has been clicked");
+
             //ProductObject.DeleteProduct();
             ProductViewModel.ProductsToDelete.Add(ProductObject);
             ProductViewModel.Products.Remove(ProductObject);

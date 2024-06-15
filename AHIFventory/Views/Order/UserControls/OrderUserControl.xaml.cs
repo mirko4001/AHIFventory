@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace AHIFventory
         public Order OrderObject { get; set; }
         public OrderUserControl(Order order)
         {
+            Log.Information("Initializing order user control");
+
             InitializeComponent();
             OrderObject = order;
 
@@ -53,6 +56,8 @@ namespace AHIFventory
 
         private void Delete()
         {
+            Log.Information("Delete order has been confirmed");
+
             DeleteOrderFlyout.IsOpen = false;
             OrderViewModel.OrdersToDelete.Add(OrderObject);
             OrderViewModel.Orders.Remove(OrderObject);
@@ -60,11 +65,15 @@ namespace AHIFventory
 
         private void DeleteNoButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Debug("Delete order and don't revert changes");
+
             Delete();
         }
 
         private void DeleteYesButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Debug("Delete order and revert changes");
+
             foreach (Product product in ProductViewModel.Products)
             {
                 if (product.Name == OrderObject.ProductName)

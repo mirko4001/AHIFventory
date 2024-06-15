@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,8 @@ namespace AHIFventory
     {
         public ProductPage()
         {
+            Log.Information("Initializing product page");
             InitializeComponent();
-
             UpdateList();
             ProductViewModel.Products.CollectionChanged += Products_CollectionChanged;
         }
@@ -35,6 +36,8 @@ namespace AHIFventory
 
         public void UpdateList()
         {
+            Log.Information("Updating products stackpanel");
+
             ProductsStackPanel.Children.Clear();
 
             foreach (Product product in ProductViewModel.Products)
@@ -47,6 +50,8 @@ namespace AHIFventory
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            Log.Information("Add product button has been clicked");
+
             EditProductWindow editProductWindow = new EditProductWindow();
             editProductWindow.ShowDialog();
 

@@ -45,7 +45,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Order Date" VerticalAlignment="Center" Margin="10" />
-            <DatePicker SelectedDate="{Binding OrderObject.OrderDate, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10" />
+            <DatePicker IsEnabled="False" SelectedDate="{Binding OrderObject.OrderDate, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10" />
         </Grid>
 
         <Grid Grid.Row="3">
