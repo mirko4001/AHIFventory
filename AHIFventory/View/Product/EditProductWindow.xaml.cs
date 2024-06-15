@@ -28,15 +28,12 @@ namespace AHIFventory
         {
             InitializeComponent();
 
-            ProductObject = new Product()
+            ProductObject = new Product(product.Name, product.Description, product.Image)
             {
-                Name = product.Name,
-                Description = product.Description,
-                Stock = product.Stock,
                 ProductID = product.ProductID,
+                Stock = product.Stock,
                 Price = product.Price,
                 StockWarning = product.StockWarning,
-                Image = product.Image,
             };
 
             ProductMain = product;
@@ -64,7 +61,6 @@ namespace AHIFventory
                 ProductMain.Price = ProductObject.Price;
                 ProductMain.StockWarning = ProductObject.StockWarning;
                 ProductMain.Image = ProductObject.Image;
-                ProductMain.Category = ProductObject.Category;
             }
 
             SaveOnClose = true;

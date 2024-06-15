@@ -21,13 +21,35 @@ namespace AHIFventory
     {
         public bool SaveOnClose = false;
         public Order OrderObject { get; set; }
+        public Product ProductObject { get; set; }
+
 
         public AddOrderWindow()
         {
             InitializeComponent();
-            OrderObject = new Order("Product Name", "Product Description", "Supplier")
+
+            if (ProductViewModel.Products.Count <= 0)
+            {
+                MessageBox.Show("You need atleast one product to make an order.");
+                return;
+            }
+
+            foreach (Product product in ProductViewModel.Products)
+            {
+                if (ProductObject == null)
+                {
+                    ProductObject = product;
+                }
+
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                comboBoxItem.Content = product;
+                ProductComboBox.Items.Add(comboBoxItem);
+            }
+
+            OrderObject = new Order("Product Name", "Supplier")
             {
                 OrderDate = DateTime.Now,
+                Action = "Buy",
             };
 
             DataContext = this;
@@ -35,7 +57,30 @@ namespace AHIFventory
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+
+            OrderObject.Price = ProductObject.Price * OrderObject.Quantity;
+            OrderObject.ProductName = ProductObject.Name;
+
+            if (OrderObject.Action == "Sell")
+            {
+                if (ProductObject.Stock >= OrderObject.Quantity)
+                {
+                    ProductObject.Stock -= OrderObject.Quantity;
+                }
+                else
+                {
+                    MessageBox.Show("Not enough Stock");
+                    return;
+                }
+            }
+
+            if (OrderObject.Action == "Buy")
+            {
+                ProductObject.Stock += OrderObject.Quantity;
+            }
+
             SaveOnClose = true;
+            Close();
         }
     }
 }

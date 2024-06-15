@@ -26,31 +26,6 @@ namespace AHIFventory
         public Product ProductTemplate { get; set; }
         public Order OrderTemplate { get; set; }
         public double OrderPrice { get; set; }
-        public OrderUserControl()
-        {
-            InitializeComponent();
-
-            /*
-            ProductTemplate = new Product("", "", "")
-            {
-                ProductID = 69,
-                Name = "Glas",
-                Description = "Product Description"
-            };
-            OrderTemplate = new Order()
-            {
-                OrderID = 0,
-                OrderDate = DateTime.Now,
-                Supplier = "Blum GmbH",
-                ProductID = (int)ProductTemplate.ProductID,
-                Quantity = 5,
-            };
-
-            OrderPrice = ProductTemplate.Price * OrderTemplate.Quantity;
-            */
-
-            DataContext = this;
-        }
 
         public Order OrderObject { get; set; }
 
@@ -58,6 +33,13 @@ namespace AHIFventory
         {
             InitializeComponent();
             OrderObject = order;
+
+            if (OrderObject.Action == "Sell")
+            {
+                isBuyOrder = false;
+                isSellOrder = true;
+            }
+
             DataContext = this;
         }
 

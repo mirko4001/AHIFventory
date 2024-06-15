@@ -21,14 +21,12 @@
 
             <Image Source="{Binding ProductObject.Image}" Margin="5" />
 
-            <StackPanel Grid.Column="1" HorizontalAlignment="Left" >
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.ProductID, StringFormat=ProductID: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Name: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Description, StringFormat=Description: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Category, StringFormat=Category: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Price, StringFormat=Price per Unit: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Stock, StringFormat=Stock: {0}}" />
-                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.StockWarning, StringFormat=Stock Warning: {0}}" />
+            <StackPanel Grid.Column="1">
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Name: {0}}" TextWrapping="Wrap" Margin="5" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Description, StringFormat=Description: {0}}" TextWrapping="Wrap" Margin="5" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Price, StringFormat=Price per Unit: {0}€}" TextWrapping="Wrap" Margin="5" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Stock, StringFormat=Stock: {0}}" TextWrapping="Wrap" Margin="5" />
+                <TextBlock TextAlignment="Center" Text="{Binding ProductObject.StockWarning, StringFormat=Stock Warning: {0}}" TextWrapping="Wrap" Margin="5" />
             </StackPanel>
 
             <StackPanel Grid.Column="2" >

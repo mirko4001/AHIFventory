@@ -77,20 +77,6 @@ namespace AHIFventory
             }
         }
 
-        private string productDescription;
-        public string ProductDescription
-        {
-            get { return productDescription; }
-            set
-            {
-                if (productDescription != value)
-                {
-                    productDescription = value;
-                    onPropertyChanged("ProductDescription");
-                }
-            }
-        }
-
         private double price;
         public double Price
         {
@@ -138,13 +124,10 @@ namespace AHIFventory
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public Order() { }
         
-        public Order(string productName, string productDescription, string supplier)
+        public Order(string productName, string supplier)
         {
             ProductName = productName;
-            ProductDescription = productDescription;
             Supplier = supplier;
         }
 
@@ -155,7 +138,6 @@ namespace AHIFventory
             Supplier = reader.IsDBNull(reader.GetOrdinal("Supplier")) ? null : reader.GetString(reader.GetOrdinal("Supplier"));
             ProductID = reader.IsDBNull(reader.GetOrdinal("ProductID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ProductID"));
             ProductName = reader.IsDBNull(reader.GetOrdinal("ProductName")) ? null : reader.GetString(reader.GetOrdinal("ProductName"));
-            ProductDescription = reader.IsDBNull(reader.GetOrdinal("ProductDescription")) ? null : reader.GetString(reader.GetOrdinal("ProductDescription"));
             Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? 0.0 : reader.GetDouble(reader.GetOrdinal("Price"));
             Quantity = reader.IsDBNull(reader.GetOrdinal("Quantity")) ? 0 : reader.GetInt32(reader.GetOrdinal("Quantity"));
             Action = reader.IsDBNull(reader.GetOrdinal("Action")) ? null : reader.GetString(reader.GetOrdinal("Action"));
@@ -191,7 +173,6 @@ namespace AHIFventory
                     command.Parameters.AddWithValue("@Supplier", Supplier ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@ProductID", ProductID);
                     command.Parameters.AddWithValue("@ProductName", ProductName ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@ProductDescription", ProductDescription ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Price", Price);
                     command.Parameters.AddWithValue("@Quantity", Quantity);
                     command.Parameters.AddWithValue("@Action", Action ?? (object)DBNull.Value);

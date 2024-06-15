@@ -9,10 +9,11 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.75*"/>
-            <RowDefinition Height="1.75*"/>
-            <RowDefinition Height="1.75*"/>
-            <RowDefinition Height="1.75*"/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="1.4*"/>
+            <RowDefinition Height="1.4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -65,15 +66,29 @@
             <TextBlock Text="Action" VerticalAlignment="Center" Margin="10" />
 
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"
-                      SelectedValue="{Binding OrderObject.Action, Mode=TwoWay}" SelectedValuePath="Content" SelectedIndex="0">
+                      SelectedValue="{Binding OrderObject.Action, Mode=TwoWay}" SelectedValuePath="Content"  SelectedItem="0" >
                 <ComboBoxItem Content="Buy" />
                 <ComboBoxItem Content="Sell" />
             </ComboBox>
         </Grid>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Product" VerticalAlignment="Center" Margin="10" />
+
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="1" BorderBrush="Black" Margin="10"
+              SelectedValue="{Binding ProductObject, Mode=TwoWay}" SelectedValuePath="Content" x:Name="ProductComboBox">
+                
+            </ComboBox>
+        </Grid>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button x:Name="CancelButton" Content="Cancel" Margin="5" IsCancel="True" />
-            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" IsCancel="True" Click="OkButton_Click" />
+            <Button x:Name="OkButton"  Content="OK" Margin="5" IsDefault="True" Click="OkButton_Click" />
         </StackPanel>
     </Grid>
 </Window>
