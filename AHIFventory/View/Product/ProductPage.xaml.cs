@@ -23,6 +23,7 @@ namespace AHIFventory
     {
         public ProductPage()
         {
+            InitializeComponent();
             UpdateList();
             ProductViewModel.Products.CollectionChanged += Products_CollectionChanged;
         }
