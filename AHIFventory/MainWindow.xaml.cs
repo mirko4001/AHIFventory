@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Serilog;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,13 @@ namespace AHIFventory
         public MainWindow()
         {
             InitializeComponent();
+
+            InitializeComponent();
+
+            Log.Logger = new LoggerConfiguration()
+               .WriteTo.Console()
+               .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+               .CreateLogger();
 
             ProductViewModel.LoadProducts();
             OrderViewModel.LoadOrders();

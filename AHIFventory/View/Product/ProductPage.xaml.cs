@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,6 @@ namespace AHIFventory
     {
         public ProductPage()
         {
-            InitializeComponent();
-
             UpdateList();
             ProductViewModel.Products.CollectionChanged += Products_CollectionChanged;
         }

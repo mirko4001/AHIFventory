@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,12 @@ namespace AHIFventory
 
         public static void LoadOrders()
         {
+            Log.Information("Loading orders");
+
+            Log.Debug("Clearing all orders from collection");
             Orders.Clear();
 
+            Log.Debug("Importing all orders from sql file");
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
@@ -39,6 +44,8 @@ namespace AHIFventory
             
         public static void SaveOrders()
         {
+            Log.Information("Saving orders to sql file");
+
             foreach (Order order in OrdersToDelete)
             {
                 order.DeleteOrder();
