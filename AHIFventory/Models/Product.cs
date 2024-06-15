@@ -181,14 +181,18 @@ namespace AHIFventory
 
                 if (value)
                 {
-                    if (NotificationSent)
+                    if (!NotificationSent)
                     {
-                        MessageBox.Show("To do: do notification");
+                        MessageBox.Show("(temp) low on stock notification");
+                        NotificationSent = true;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("To do: change property for notification to false, so you get notification again next time");
+                    if (NotificationSent)
+                    {
+                        NotificationSent = false;
+                    }
                 }
 
                 return value;
