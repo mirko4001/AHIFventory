@@ -28,12 +28,6 @@ namespace AHIFventory
         {
             InitializeComponent();
 
-            if (ProductViewModel.Products.Count <= 0)
-            {
-                MessageBox.Show("You need atleast one product to make an order.");
-                return;
-            }
-
             foreach (Product product in ProductViewModel.Products)
             {
                 if (ProductObject == null)

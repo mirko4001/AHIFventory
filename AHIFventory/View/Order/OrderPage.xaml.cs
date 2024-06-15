@@ -49,6 +49,12 @@ namespace AHIFventory
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductViewModel.Products.Count <= 0)
+            {
+                MessageBox.Show("You need atleast one product to make an order.");
+                return;
+            }
+
             AddOrderWindow addOrderWindow = new AddOrderWindow();
             addOrderWindow.ShowDialog();
 
