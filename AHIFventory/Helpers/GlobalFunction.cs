@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Wpf.Ui.Controls;
 using Wpf.Ui;
 using Wpf.Ui.Extensions;
-using Microsoft.Toolkit.Uwp.Notifications;
 using System.Windows;
 
 namespace AHIFventory
@@ -22,11 +21,6 @@ namespace AHIFventory
             };
 
             _ = await uiMessageBox.ShowDialogAsync();
-        }
-
-        public static void ShowNotification(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
