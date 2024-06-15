@@ -23,10 +23,6 @@ namespace AHIFventory
     {
         public bool isBuyOrder { get; set; } = true;
         public bool isSellOrder { get; set; } = false;
-        public Product ProductTemplate { get; set; }
-        public Order OrderTemplate { get; set; }
-        public double OrderPrice { get; set; }
-
         public Order OrderObject { get; set; }
 
         public OrderUserControl(Order order)
@@ -58,6 +54,28 @@ namespace AHIFventory
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+
+            var dialog = new DeleteOrderConfirmationDialogWindow();
+            dialog.ShowDialog();
+
+            if (dialog.IsConfirmed)
+            {
+                foreach (Product product in ProductViewModel.Products) 
+                {
+                    if (product.Name == OrderObject.ProductName)
+                    {
+                        if (OrderObject.Action == "Buy")
+                        {
+                            product.Stock -= OrderObject.Quantity;
+                        }
+                        else
+                        {
+                            product.Stock += OrderObject.Quantity;
+                        }
+                    }
+                }
+            }
+
             //OrderObject.DeleteOrder();
             OrderViewModel.OrdersToDelete.Add(OrderObject);
             OrderViewModel.Orders.Remove(OrderObject);
