@@ -15,12 +15,9 @@ using System.Windows.Shapes;
 
 namespace AHIFventory
 {
-    /// <summary>
-    /// Interaction logic for HomePage.xaml
-    /// </summary>
-    public partial class HomePage : Page
+    public partial class DashboardPage : Page
     {
-        public HomePage()
+        public DashboardPage()
         {
             InitializeComponent();
         }
