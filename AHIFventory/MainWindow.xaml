@@ -32,7 +32,7 @@
                 <ui:NavigationViewItemSeparator Margin="5,5"/>
                 <ui:NavigationViewItemHeader Text="Overview" Margin="5,0,0,0"/>
 
-                <ui:NavigationViewItem Content="Dashboard" VerticalAlignment="Top" TargetPageType="{x:Type local:HomePage}">
+                <ui:NavigationViewItem Content="Dashboard" VerticalAlignment="Top" TargetPageType="{x:Type local:DashboardPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Home24" FontSize="30" Height="50"/>
                     </ui:NavigationViewItem.Icon>
