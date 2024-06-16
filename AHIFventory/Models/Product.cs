@@ -184,7 +184,6 @@ namespace AHIFventory
                     if (!NotificationSent)
                     {
                         MessageBox.Show("(temp) low on stock notification");
-                        GlobalFunction.ShowToastNotification("Warning", $"Product '{name}' is low on stock.");
                         NotificationSent = true;
                     }
                 }
