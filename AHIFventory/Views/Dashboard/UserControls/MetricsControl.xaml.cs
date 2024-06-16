@@ -39,7 +39,11 @@ namespace AHIFventory
             OrdersStackPanel.Children.Clear();
             foreach (Order order in RecentOrders)
             {
+                RecentOrderControl recentOrderControl = new RecentOrderControl();
+                recentOrderControl.BuyOrSell = "Buy";
+                recentOrderControl.Margin = new Thickness(10);
 
+                OrdersStackPanel.Children.Add(recentOrderControl);  
             }
         }
     }
