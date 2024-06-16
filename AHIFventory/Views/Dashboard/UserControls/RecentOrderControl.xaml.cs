@@ -20,19 +20,14 @@ namespace AHIFventory
     /// </summary>
     public partial class RecentOrderControl : UserControl
     {
-        public Product OrderObject { get; set; }
-        public RecentOrderControl()
+        public Order OrderObject { get; set; }
+        public RecentOrderControl(Order order)
         {
             InitializeComponent();
 
-            this.DataContext = this;
-        }
+            OrderObject = order;
 
-        public static readonly DependencyProperty BuyOrSellProperty = DependencyProperty.Register("BuyOrSell", typeof(string), typeof(RecentOrderControl), new PropertyMetadata(""));
-        public string BuyOrSell
-        {
-            get { return (string)GetValue(BuyOrSellProperty); }
-            set { SetValue(BuyOrSellProperty, value); }
+            this.DataContext = this;
         }
     }
 }

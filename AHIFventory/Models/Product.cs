@@ -309,7 +309,7 @@ namespace AHIFventory
 
         public override string ToString()
         {
-            return $"{Name}, {Price}€ per Unit";
+            return $"{Name}, {Price}€ per unit";
         }
 
     }

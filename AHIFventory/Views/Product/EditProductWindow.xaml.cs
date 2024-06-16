@@ -59,6 +59,11 @@ namespace AHIFventory
         {
             Log.Information("Product changes confirmed");
 
+            if (string.IsNullOrEmpty(ProductObject.Image) || string.IsNullOrEmpty(ProductObject.Image.Trim()))
+            {
+                ProductObject.Image = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F004%2F141%2F669%2Foriginal%2Fno-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg&f=1&nofb=1&ipt=34a004bb91d28dd9906e84b1bc52e2314d7c3a07d91cd5040efc76794d74b52a&ipo=images";
+            }
+
             if (ProductMain != null && ProductObject != null)
             {
                 ProductMain.Name = ProductObject.Name;
@@ -68,6 +73,9 @@ namespace AHIFventory
                 ProductMain.Price = ProductObject.Price;
                 ProductMain.StockWarning = ProductObject.StockWarning;
                 ProductMain.Image = ProductObject.Image;
+
+
+
             }
 
             SaveOnClose = true;
