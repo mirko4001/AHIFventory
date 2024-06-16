@@ -61,5 +61,10 @@ namespace AHIFventory
                 ProductViewModel.Products.Add(editProductWindow.ProductObject);
             }
         }
+
+        private void ExportPDFButton_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExporter.ExportProductsToPdf();
+        }
     }
 }
