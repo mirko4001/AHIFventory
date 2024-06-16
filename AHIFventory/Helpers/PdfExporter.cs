@@ -49,6 +49,46 @@ namespace AHIFventory
             }
         }
 
+        public static void ExportOrdersToPdf()
+        {
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string pdfPath = Path.Combine(documentsPath, "orders.pdf");
+
+            using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
+            {
+                PdfWriter writer = new PdfWriter(fileStream);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document document = new Document(pdfDocument);
+
+                // Add title
+                var titleFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                document.Add(new Paragraph("Orders").SetFont(titleFont).SetFontSize(18));
+                document.Add(new Paragraph("\n"));
+
+                // Create table with three columns
+                Table table = new Table(new float[] { 1, 1, 1, 1 }).UseAllAvailableWidth();
+
+                // Add table headers
+                AddCellToHeader(table, "Supplier");
+                AddCellToHeader(table, "Product");
+                AddCellToHeader(table, "Quantity");
+                AddCellToHeader(table, "Price");
+
+                // Add data rows
+                foreach (var order in OrderViewModel.Orders)
+                {
+                    AddCellToBody(table, order.Supplier);
+                    AddCellToBody(table, order.ProductName.ToString());
+                    AddCellToBody(table, order.Quantity.ToString());
+                    AddCellToBody(table, order.Price.ToString());
+                }
+
+                document.Add(table);
+
+                document.Close();
+            }
+        }
+
         private static void AddCellToHeader(Table table, string headerText)
         {
             var cell = new Cell().Add(new Paragraph(headerText));
