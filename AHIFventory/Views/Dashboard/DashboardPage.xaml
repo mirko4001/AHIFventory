@@ -32,6 +32,7 @@
 
         <local:MetricsControl Grid.Row="2" Margin="10"/>
         <local:ExpensesControl Grid.Row="2" Grid.Column="1" Margin="10"/>
+        <local:LowStockControl Grid.Row="3" Grid.ColumnSpan="2" Margin="10"/>
 
     </Grid>
 </Page>

@@ -11,18 +11,16 @@
         <vm:OrderViewModel/>
     </UserControl.DataContext>
     <Border Background="White" CornerRadius="10" BorderBrush="Black" BorderThickness="1">
-        <Viewbox>
-            <StackPanel Margin="10">
-                <TextBlock Text="Total Revenue:" FontWeight="Bold" Background="LightGreen"/>
-                <TextBlock Text="{Binding Path=TotalRevenue, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
+        <StackPanel Margin="10">
+            <TextBlock Text="Total Revenue:" FontSize="30" FontWeight="Bold" Background="LightGreen"/>
+            <TextBlock FontSize="30" Text="{Binding Path=TotalRevenue, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
 
-                <TextBlock Text="Total Expenses:" FontWeight="Bold" Background="red"/>
-                <TextBlock Text="{Binding Path=TotalExpenses, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
+            <TextBlock FontSize="30" Text="Total Expenses:" FontWeight="Bold" Background="red"/>
+            <TextBlock FontSize="30" Text="{Binding Path=TotalExpenses, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
 
-                <TextBlock Text="Total Profit:" FontWeight="Bold" Background="LightGray"/>
-                <TextBlock Text="{Binding Path=TotalProfit, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
-            </StackPanel>
-        </Viewbox>
-        
+            <TextBlock FontSize="30" Text="Total Profit:" FontWeight="Bold" Background="LightGray"/>
+            <TextBlock FontSize="30" Text="{Binding Path=TotalProfit, StringFormat=C, ConverterCulture=de-DE}" Margin="5"/>
+        </StackPanel>
+
     </Border>
 </UserControl>
