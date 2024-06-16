@@ -39,9 +39,7 @@ namespace AHIFventory
             OrdersStackPanel.Children.Clear();
             foreach (Order order in RecentOrders)
             {
-                OrderUserControl orderUserControl = new OrderUserControl(order);
-                orderUserControl.Margin = new Thickness(50);
-                OrdersStackPanel.Children.Add(orderUserControl);
+
             }
         }
     }

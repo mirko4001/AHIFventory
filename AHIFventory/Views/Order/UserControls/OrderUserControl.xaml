@@ -29,7 +29,7 @@
             <TextBlock Text="BUY" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
         </Border>
 
-        <Border  x:Name="SellBorder" CornerRadius="5" Grid.RowSpan="2" Margin="8" Visibility="{Binding isSellOrder, Converter={StaticResource BoolToVisibility}}">
+        <Border x:Name="SellBorder" CornerRadius="5" Grid.RowSpan="2" Margin="8" Visibility="{Binding isSellOrder, Converter={StaticResource BoolToVisibility}}">
             <Border.Background>
                 <SolidColorBrush Color="#FF2222"/>
             </Border.Background>
