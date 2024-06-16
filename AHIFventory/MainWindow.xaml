@@ -50,7 +50,7 @@
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
-                
+
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItemSeparator Margin="5,5"/>
                 <ui:NavigationViewItemHeader Text="Preferences" Margin="5,0,0,0"/>
@@ -66,6 +66,12 @@
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.FooterMenuItems>
+
+            <ui:NavigationView.ContentOverlay>
+                <Grid>
+                    <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
+                </Grid>
+            </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
     </Grid>
 </Window>

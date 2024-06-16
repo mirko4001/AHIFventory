@@ -12,6 +12,8 @@ namespace AHIFventory
 {
     public class GlobalFunction
     {
+        public static SnackbarService SnackbarService = new SnackbarService();
+        
         public static async void ShowCustomMessageBox(string title, string content)
         {
             var uiMessageBox = new Wpf.Ui.Controls.MessageBox
@@ -23,9 +25,25 @@ namespace AHIFventory
             _ = await uiMessageBox.ShowDialogAsync();
         }
 
-        public static void ShowSnackbar(string title, string content)
+        public static void ShowSnackbar(
+            string title,
+            string content,
+            TimeSpan? duration = null,
+            ControlAppearance? appearance = null,
+            SymbolIcon icon = null)
         {
+            appearance ??= ControlAppearance.Info;
+            icon ??= new SymbolIcon(SymbolRegular.Info28);
+            duration ??= TimeSpan.FromSeconds(2);
 
+            SnackbarService.Show(
+                title,
+                content,
+                appearance.Value,
+                icon,
+                duration.Value
+            );
         }
+
     }
 }
