@@ -15,13 +15,13 @@
             </Grid.ColumnDefinitions>
 
             <Border CornerRadius="5" Margin="8" BorderBrush="LightGray" BorderThickness="1" Background="LightGray">
-                <TextBlock Text="{Binding BuyOrSell}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
+                <TextBlock Text="{Binding OrderObject.Action}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Border>
 
             <Viewbox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="OrderDate" Margin="5,0,20,0" FontWeight="Bold"/>
-                    <TextBlock Text="ProductName" Margin="0,0,5,0" FontWeight="Bold" />
+                    <TextBlock Text="{Binding OrderObject.OrderDate, StringFormat={}{0:dd.MM.yyyy}}" Margin="5,0,20,0" FontWeight="Bold" />
+                    <TextBlock Text="{Binding OrderObject.ProductName}" Margin="0,0,5,0" FontWeight="Bold" />
                 </StackPanel>
             </Viewbox>
             
