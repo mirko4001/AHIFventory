@@ -11,10 +11,10 @@ namespace AHIFventory
 {
     public class PdfExporter
     {
-        public static void ExportProductsToPdf()
+        public static void ExportToPdf<T>(string title, string filename, List<string> headers, List<T> data)
         {
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string pdfPath = Path.Combine(documentsPath, "products.pdf");
+            string pdfPath = Path.Combine(documentsPath, filename);
 
             using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
             {
@@ -24,70 +24,58 @@ namespace AHIFventory
 
                 // Add title
                 var titleFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-                document.Add(new Paragraph("Prodcuts").SetFont(titleFont).SetFontSize(18));
+                document.Add(new Paragraph(title).SetFont(titleFont).SetFontSize(18));
                 document.Add(new Paragraph("\n"));
 
-                // Create table with three columns
-                Table table = new Table(new float[] { 1, 1, 1 }).UseAllAvailableWidth();
+                // Create table with headers
+                float[] columnWidths = Enumerable.Repeat(1f, headers.Count).ToArray();
+                Table table = new Table(columnWidths).UseAllAvailableWidth();
 
                 // Add table headers
-                AddCellToHeader(table, "Name");
-                AddCellToHeader(table, "Price per Unit");
-                AddCellToHeader(table, "Stock");
+                foreach (var header in headers)
+                {
+                    AddCellToHeader(table, header);
+                }
 
                 // Add data rows
-                foreach (var product in ProductViewModel.Products)
+                foreach (var item in data)
                 {
-                    AddCellToBody(table, product.Name);
-                    AddCellToBody(table, product.Price.ToString());
-                    AddCellToBody(table, product.Stock.ToString());
+                    var properties = item.GetType().GetProperties();
+                    foreach (var prop in properties)
+                    {
+                        if (headers.Contains(prop.Name) || (prop.Name == "ProductName" && headers.Contains("Product")) || (prop.Name == "Price" && headers.Contains("Price per unit")))
+                        {
+                            AddCellToBody(table, prop.GetValue(item)?.ToString());
+                        }
+                    }
                 }
 
                 document.Add(table);
 
                 document.Close();
             }
+        }
+
+        public static void ExportProductsToPdf()
+        {
+            string title = "Products";
+            string filename = "products.pdf";
+            List<string> headers = new List<string> { "Name", "Price per unit", "Stock" };
+            List<Product> data = ProductViewModel.Products.ToList();
+
+            ExportToPdf(title, filename, headers, data);
         }
 
         public static void ExportOrdersToPdf()
         {
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string pdfPath = Path.Combine(documentsPath, "orders.pdf");
+            string title = "Orders";
+            string filename = "orders.pdf";
+            List<string> headers = new List<string> { "Supplier", "Product", "Quantity", "Price" };
+            List<Order> data = OrderViewModel.Orders.ToList();
 
-            using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
-            {
-                PdfWriter writer = new PdfWriter(fileStream);
-                PdfDocument pdfDocument = new PdfDocument(writer);
-                Document document = new Document(pdfDocument);
-
-                // Add title
-                var titleFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-                document.Add(new Paragraph("Orders").SetFont(titleFont).SetFontSize(18));
-                document.Add(new Paragraph("\n"));
-
-                // Create table with three columns
-                Table table = new Table(new float[] { 1, 1, 1, 1 }).UseAllAvailableWidth();
-
-                // Add table headers
-                AddCellToHeader(table, "Supplier");
-                AddCellToHeader(table, "Product");
-                AddCellToHeader(table, "Quantity");
-                AddCellToHeader(table, "Price");
-
-                // Add data rows
-                foreach (var order in OrderViewModel.Orders)
-                {
-                    AddCellToBody(table, order.Supplier);
-                    AddCellToBody(table, order.ProductName.ToString());
-                    AddCellToBody(table, order.Quantity.ToString());
-                    AddCellToBody(table, order.Price.ToString());
-                }
-
-                document.Add(table);
-
-                document.Close();
-            }
+            ExportToPdf(title, filename, headers, data);
         }
+
 
         private static void AddCellToHeader(Table table, string headerText)
         {
