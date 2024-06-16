@@ -71,5 +71,10 @@ namespace AHIFventory
                 OrderViewModel.Orders.Add(addOrderWindow.OrderObject);
             }
         }
+
+        private void ExportPDFButton_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExporter.ExportOrdersToPdf();
+        }
     }
 }

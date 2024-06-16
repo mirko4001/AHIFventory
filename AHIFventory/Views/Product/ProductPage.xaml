@@ -33,8 +33,21 @@
             </ScrollViewer>
         </Border>
 
-        <Border Grid.Row="1" Background="WhiteSmoke" CornerRadius="10" Margin="5">
-            <ui:Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="AddButton_Click" Icon="{ui:SymbolIcon Add48}" ToolTipService.ToolTip="Add new product" />
-        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="WhiteSmoke" CornerRadius="10" Margin="5">
+                <ui:Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="AddButton_Click" Icon="{ui:SymbolIcon Add48}" ToolTipService.ToolTip="Add new product" />
+            </Border>
+
+            <Border Grid.Column="1" Background="WhiteSmoke" CornerRadius="10" Margin="5">
+                <ui:Button x:Name="ExportPDFButton" Content="Export PDF" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="ExportPDFButton_Click" Icon="{ui:SymbolIcon DocumentSave24}" ToolTipService.ToolTip="Export all products to pdf" />
+            </Border>
+        </Grid>
+        
+
     </Grid>
 </Page>
