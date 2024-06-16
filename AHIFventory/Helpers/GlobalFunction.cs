@@ -7,9 +7,6 @@ using Wpf.Ui.Controls;
 using Wpf.Ui;
 using Wpf.Ui.Extensions;
 using System.Windows;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
 
 namespace AHIFventory
 {
@@ -26,39 +23,9 @@ namespace AHIFventory
             _ = await uiMessageBox.ShowDialogAsync();
         }
 
-        public static void ShowToastNotification(string title, string content)
+        public static void ShowSnackbar(string title, string content)
         {
-            ToastVisual visual = new ToastVisual()
-            {
-                BindingGeneric = new ToastBindingGeneric()
-                {
-                    Children =
-            {
-                new AdaptiveText()
-                {
-                    Text = title
-                },
-                new AdaptiveText()
-                {
-                    Text = content
-                }
-            }
-                }
-            };
 
-            ToastContent toastContent = new ToastContent()
-            {
-                Visual = visual
-            };
-
-            string xmlContent = toastContent.GetContent();
-
-            var toastXml = new XmlDocument();
-            toastXml.LoadXml(xmlContent);
-
-            var toast = new ToastNotification(toastXml);
-
-            ToastNotificationManager.CreateToastNotifier("AHIFusion").Show(toast);
         }
     }
 }
