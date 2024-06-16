@@ -32,6 +32,12 @@ namespace AHIFventory
             OrderViewModel.LoadOrders();
 
             Closing += MainWindow_Closing;
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            RootNavigation.Navigate(typeof(DashboardPage));
         }
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
