@@ -47,3 +47,12 @@ Funktioniert gut auf Windows 10 & 11.
 - Internet
     - [Google](https://www.google.at/)
     - [ChatGPT](https://chatgpt.com/)
+
+## Anmerkungen
+
+* Da wir durch das PoS Projekt Druck hatten, kann man merken, dass das Projekt in der letzten Woche vor der Abgabe gemacht wurde.
+* Wir haben wie gewohnt im Unterricht SQlite verwendet, um die Daten unserer Inventar-Management-Applikation zu speichern.
+* Es wurden 2 Tabellen erstellt: Produkt- und Ordertabelle
+* Alle CRUD Abfragen wurden verwendet
+* Da unser Programm beim Laden der Applikation alle Daten aus der Datenbank in einer Collection speichert und Instanzen daraus erzeugt, haben wir uns dafür entschieden, keine Join Abfrage zu benutzen.
+* Wir haben die externe Library WPF UI verwendet, um mehrere Controls zu benutzen
