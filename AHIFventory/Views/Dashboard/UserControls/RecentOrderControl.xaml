@@ -20,8 +20,8 @@
 
             <Viewbox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding OrderObject.OrderDate, StringFormat={}{0:dd.MM.yyyy}}" Margin="5,0,20,0" FontWeight="Bold" />
-                    <TextBlock Text="{Binding OrderObject.ProductName}" Margin="0,0,5,0" FontWeight="Bold" />
+                    <TextBlock Text="{Binding OrderObject.OrderDate, StringFormat={}{0:dd.MM.yyyy}}" Margin="5,0,20,0" FontWeight="Normal" />
+                    <TextBlock Text="{Binding OrderObject.ProductName}" Margin="0,0,5,0" FontWeight="Normal" />
                 </StackPanel>
             </Viewbox>
             

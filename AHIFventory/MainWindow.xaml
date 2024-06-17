@@ -6,22 +6,19 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:AHIFventory"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        WindowState="Maximized" ResizeMode="CanMinimize">
 
     <Grid>
-
-        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" IsBackButtonVisible="Collapsed">
+        <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" IsPaneToggleVisible="False" IsBackButtonVisible="Collapsed">
             <ui:NavigationView.PaneHeader>
                 <StackPanel Orientation="Horizontal">
-                    <Border CornerRadius="10" BorderThickness="2" BorderBrush="Black" Width="40" Height="40" Background="AliceBlue" Margin="5">
-                        <!--Hier kommt ein Logo-->
-                    </Border>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="AHIFventory" FontSize="24" FontWeight="Bold" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="AHIFventory" FontSize="24" FontWeight="Bold" Margin="15,15,0,0" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="1" Text="Inventory Management" Margin="15,0,0,0"/>
                     </Grid>
                 </StackPanel>
@@ -54,11 +51,6 @@
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItemSeparator Margin="5,5"/>
                 <ui:NavigationViewItemHeader Text="Preferences" Margin="5,0,0,0"/>
-                <ui:NavigationViewItem Content="Settings">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Settings24" FontSize="30" Height="50"/>
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
 
                 <ui:NavigationViewItem Content="Theme">
                     <ui:NavigationViewItem.Icon>

@@ -28,7 +28,6 @@
         <Border Grid.Row="2" Background="LightGray" CornerRadius="10" Margin="5">
             <ScrollViewer>
                 <StackPanel x:Name="ProductsStackPanel">
-
                 </StackPanel>
             </ScrollViewer>
         </Border>

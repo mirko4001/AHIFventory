@@ -12,7 +12,14 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
     </UserControl.Resources>
 
-    <Border Background="WhiteSmoke" CornerRadius="10">
+    <Border CornerRadius="10" BorderBrush="Black" BorderThickness="0.5">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                <GradientStop Color="#dbed9a" Offset="0"/>
+                <GradientStop Color="#a1b364" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -37,7 +44,13 @@
             <StackPanel Grid.Column="2" >
                 <ui:Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" Icon="{ui:SymbolIcon Edit48}" ToolTipService.ToolTip="Edit product" />
                 <ui:Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" Icon="{ui:SymbolIcon Delete48}" ToolTipService.ToolTip="Delete product" />
-                <Border x:Name="BuyBorder" CornerRadius="5" Background="Red" Margin="8" Visibility="{Binding ProductObject.LowOnStock, Converter={StaticResource BoolToVisibility}}">
+                <Border x:Name="BuyBorder" CornerRadius="5" Margin="8" Visibility="{Binding ProductObject.LowOnStock, Converter={StaticResource BoolToVisibility}}">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Color="#ff0000" Offset="0"/>
+                            <GradientStop Color="#a63333" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
                     <TextBlock Text="LOW ON STOCK" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Padding="5"/>
                 </Border>
             </StackPanel>
