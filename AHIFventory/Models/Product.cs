@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -228,22 +229,24 @@ namespace AHIFventory
 
         public void SaveProduct()
         {
+            Log.Information("Saving product to sql file");
+
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
 
                 string query;
 
-                // Check if this is a new product or an existing one
+                Log.Debug("Check if this is a new product or an existing one");
                 if (ProductID == null)
                 {
-                    // Insert new product
+                    Log.Debug("Insert new product");
                     query = @"INSERT INTO tblProduct (Name, Description, Price, Stock, StockWarning, Image, NotificationSent) 
                       VALUES (@Name, @Description, @Price, @Stock, @StockWarning, @Image, @NotificationSent)";
                 }
                 else
                 {
-                    // Update existing product
+                    Log.Debug("Update existing product");
                     query = @"UPDATE tblProduct 
                       SET Name = @Name, Description = @Description, Price = @Price, 
                           Stock = @Stock, StockWarning = @StockWarning, Image = @Image, NotificationSent = @NotificationSent
@@ -252,7 +255,7 @@ namespace AHIFventory
 
                 using (var command = new SqliteCommand(query, connection))
                 {
-                    // Add parameters to the command
+                    Log.Debug("Add parameters to the command");
                     command.Parameters.AddWithValue("@Name", Name ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Description", Description ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Price", Price);
@@ -270,7 +273,7 @@ namespace AHIFventory
                     command.ExecuteNonQuery();
                 }
 
-                // If this was a new product, get the last inserted ID
+                Log.Debug("If this was a new product, get the last inserted ID");
                 if (ProductID == null)
                 {
                     query = "SELECT last_insert_rowid()";
@@ -280,15 +283,15 @@ namespace AHIFventory
                     }
                 }
             }
-
-            //ProductViewModel.LoadProducts();
         }
 
         public void DeleteProduct()
         {
+            Log.Information("Deleting product from sql file");
+
             if (ProductID == null)
             {
-                //throw new InvalidOperationException("Product ID cannot be null when deleting a product.");
+                Log.Warning("Product ID cannot be null when deleting a product.");
                 return;
             }
 
@@ -302,9 +305,7 @@ namespace AHIFventory
                     command.Parameters.AddWithValue("@ProductID", ProductID);
                     command.ExecuteNonQuery();
                 }
-            }
-
-            //ProductViewModel.LoadProducts();
+            };
         }
 
         public override string ToString()

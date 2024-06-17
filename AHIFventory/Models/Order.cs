@@ -1,5 +1,6 @@
 ﻿using AHIFventory;
 using Microsoft.Data.Sqlite;
+using Serilog;
 using System;
 using System.ComponentModel;
 
@@ -157,6 +158,8 @@ namespace AHIFventory
 
         public void SaveOrder()
         {
+            Log.Information("Saving order to sql file");
+
             using (var connection = new SqliteConnection("Data Source=assets\\AHIFventoryDB.db"))
             {
                 connection.Open();
@@ -165,13 +168,13 @@ namespace AHIFventory
 
                 if (OrderID == 0)
                 {
-                    // Insert new order
+                    Log.Debug("Insert new order");
                     query = @"INSERT INTO tblOrder (OrderDate, Supplier, ProductID, ProductName, Price, Quantity, Action) 
                               VALUES (@OrderDate, @Supplier, @ProductID, @ProductName, @Price, @Quantity, @Action)";
                 }
                 else
                 {
-                    // Update existing order
+                    Log.Debug("Update existing order");
                     query = @"UPDATE tblOrder 
                               SET OrderDate = @OrderDate, Supplier = @Supplier, ProductID = @ProductID, ProductName = @ProductName, 
                                   Price = @Price, Quantity = @Quantity, Action = @Action 
@@ -201,15 +204,15 @@ namespace AHIFventory
                     }
                 }
             }
-
-            //OrderViewModel.LoadOrders();
         }
 
         public void DeleteOrder()
         {
-            if (ProductID == null)
+            Log.Information("Deleting order from sql file");
+
+            if (OrderID == null)
             {
-                //throw new InvalidOperationException("Product ID cannot be null when deleting a product.");
+               Log.Warning("Order ID cannot be null when deleting a order.");
                 return;
             }
 
@@ -224,8 +227,6 @@ namespace AHIFventory
                     command.ExecuteNonQuery();
                 }
             }
-
-            //OrderViewModel.LoadOrders();
         }
     }
 }
