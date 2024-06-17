@@ -48,17 +48,6 @@
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
 
-            <ui:NavigationView.FooterMenuItems>
-                <ui:NavigationViewItemSeparator Margin="5,5"/>
-                <ui:NavigationViewItemHeader Text="Preferences" Margin="5,0,0,0"/>
-
-                <ui:NavigationViewItem Content="Theme">
-                    <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Album24" FontSize="30" Height="50"/>
-                    </ui:NavigationViewItem.Icon>
-                </ui:NavigationViewItem>
-            </ui:NavigationView.FooterMenuItems>
-
             <ui:NavigationView.ContentOverlay>
                 <Grid>
                     <ui:SnackbarPresenter x:Name="SnackbarPresenter" />

@@ -28,12 +28,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <ui:Image CornerRadius="4" BorderBrush="#33000000"  Source="{Binding ProductObject.Image}" Margin="5" />
 
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Name, StringFormat=Name: {0}}" TextWrapping="Wrap" Margin="5" />
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Description, StringFormat=Description: {0}}" TextWrapping="Wrap" Margin="5" />
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.Price, StringFormat=Price per Unit: {0}€}" TextWrapping="Wrap" Margin="5" />
@@ -41,7 +41,7 @@
                 <TextBlock TextAlignment="Center" Text="{Binding ProductObject.StockWarning, StringFormat=Stock Warning: {0}}" TextWrapping="Wrap" Margin="5" />
             </StackPanel>
 
-            <StackPanel Grid.Column="2" >
+            <StackPanel Grid.Column="2" VerticalAlignment="Center">
                 <ui:Button x:Name="EditButton" Content="Edit" Foreground="Black" Click="EditButton_Click" Margin="5" HorizontalAlignment="Center" Icon="{ui:SymbolIcon Edit48}" ToolTipService.ToolTip="Edit product" />
                 <ui:Button x:Name="DeleteButton" Content="Delete" Foreground="Black" Margin="5" HorizontalAlignment="Center" Click="DeleteButton_Click" Icon="{ui:SymbolIcon Delete48}" ToolTipService.ToolTip="Delete product" />
                 <Border x:Name="BuyBorder" CornerRadius="5" Margin="8" Visibility="{Binding ProductObject.LowOnStock, Converter={StaticResource BoolToVisibility}}">

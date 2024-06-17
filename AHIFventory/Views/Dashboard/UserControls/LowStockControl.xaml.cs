@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,12 @@ namespace AHIFventory
         {
             InitializeComponent();
             Loaded += LowStockControl_Loaded;
+            ProductViewModel.Products.CollectionChanged += Products_CollectionChanged;
+        }
+
+        private void Products_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            LoadLowStockProducts();
         }
 
         private void LowStockControl_Loaded(object sender, RoutedEventArgs e)
@@ -33,6 +40,7 @@ namespace AHIFventory
 
         private void LoadLowStockProducts()
         {
+            ProductsStackPanel.Children.Clear();
             int count = 0;
             if (ProductViewModel.Products.Count > 0)
             {
