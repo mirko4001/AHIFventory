@@ -15,7 +15,17 @@ namespace AHIFventory
         public static ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
         public static ObservableCollection<Order> OrdersToDelete { get; set; } = new ObservableCollection<Order>();
 
-        public OrderViewModel() { }
+        public static double TotalRevenue => Orders
+            .Where(order => order.Action == "Sell")
+            .Sum(order => order.Price);
+
+        public static double TotalExpenses => Orders
+            .Where(order => order.Action == "Buy")
+            .Sum(order => order.Price);
+
+        public static double TotalProfit => TotalRevenue - TotalExpenses;
+
+    public OrderViewModel() { }
 
         public static void LoadOrders()
         {
