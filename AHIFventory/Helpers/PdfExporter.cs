@@ -6,6 +6,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using Serilog;
 
 namespace AHIFventory
 {
@@ -13,6 +14,8 @@ namespace AHIFventory
     {
         public static void ExportToPdf<T>(string title, string filename, List<string> headers, List<T> data)
         {
+            Log.Information("Exporitng to pdf");
+
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string pdfPath = Path.Combine(documentsPath, filename);
 
@@ -22,22 +25,22 @@ namespace AHIFventory
                 PdfDocument pdfDocument = new PdfDocument(writer);
                 Document document = new Document(pdfDocument);
 
-                // Add title
+                Log.Debug("Add title");
                 var titleFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 document.Add(new Paragraph(title).SetFont(titleFont).SetFontSize(18));
                 document.Add(new Paragraph("\n"));
 
-                // Create table with headers
+                Log.Debug("Create table with headers");
                 float[] columnWidths = Enumerable.Repeat(1f, headers.Count).ToArray();
                 Table table = new Table(columnWidths).UseAllAvailableWidth();
 
-                // Add table headers
+                Log.Debug("Add table headers");
                 foreach (var header in headers)
                 {
                     AddCellToHeader(table, header);
                 }
 
-                // Add data rows
+                Log.Debug("Add data rows");
                 foreach (var item in data)
                 {
                     var properties = item.GetType().GetProperties();
@@ -58,6 +61,8 @@ namespace AHIFventory
 
         public static void ExportProductsToPdf()
         {
+            Log.Information("Exporting products to pdf");
+
             string title = "Products";
             string filename = "products.pdf";
             List<string> headers = new List<string> { "Name", "Price per unit", "Stock" };
@@ -68,6 +73,8 @@ namespace AHIFventory
 
         public static void ExportOrdersToPdf()
         {
+            Log.Information("Exporting orders to pdf");
+
             string title = "Orders";
             string filename = "orders.pdf";
             List<string> headers = new List<string> { "Supplier", "Product", "Quantity", "Price" };

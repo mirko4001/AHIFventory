@@ -73,9 +73,6 @@ namespace AHIFventory
                 ProductMain.Price = ProductObject.Price;
                 ProductMain.StockWarning = ProductObject.StockWarning;
                 ProductMain.Image = ProductObject.Image;
-
-
-
             }
 
             SaveOnClose = true;
