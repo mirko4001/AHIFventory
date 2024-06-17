@@ -77,7 +77,7 @@ namespace AHIFventory
 
             string title = "Orders";
             string filename = "orders.pdf";
-            List<string> headers = new List<string> { "Supplier", "Product", "Quantity", "Price" };
+            List<string> headers = new List<string> { "Supplier", "Product", "Quantity", "Price", "Action" };
             List<Order> data = OrderViewModel.Orders.ToList();
 
             ExportToPdf(title, filename, headers, data);
